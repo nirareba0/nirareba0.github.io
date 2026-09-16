@@ -19,5 +19,5 @@ document.querySelectorAll('[data-playlist]').forEach(host=>{
 });
 const hero=document.querySelector('.editorial-hero');let glyph=0;
 const layers=[...document.querySelectorAll('.shape-layer')];
-setInterval(()=>{if(!hero||reduce.matches||document.hidden||hero.getBoundingClientRect().bottom<=0||hero.querySelector('.cinema-toggle')?.getAttribute('aria-pressed')==='true')return;glyph=(glyph+1)%layers.length;layers.forEach((layer,i)=>layer.classList.toggle('is-active',i===glyph))},5500);
+setInterval(()=>{if(!hero||reduce.matches||document.hidden||hero.getBoundingClientRect().bottom<=0||hero.querySelector('.cinema-toggle')?.getAttribute('aria-pressed')==='true')return;glyph=(glyph+1)%layers.length;layers.forEach((layer,i)=>layer.classList.toggle('is-active',i===glyph))},3800);
 })();

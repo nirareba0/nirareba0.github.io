@@ -2,22 +2,22 @@
 .creation-line{display:flex;align-items:center;white-space:nowrap;gap:.04em;margin-top:.07em}
 .creation-line .shape-stage{width:3.12em;flex:0 0 3.12em;height:1.28em;margin:0;padding:.04em 0;overflow:hidden;line-height:1.2;align-items:center}
 .creation-line .shape-layer{width:100%;height:1.2em;justify-content:center;gap:0;letter-spacing:-.06em}
-.creation-line .word-art img{display:block;width:100%;height:1.15em;object-fit:contain;max-width:none}
 .creation-ending{font-family:inherit;font-weight:inherit;letter-spacing:inherit;line-height:1.2}
 html .editorial-hero .cinema-controls{justify-content:flex-end;border-top:0;padding-top:0;left:auto}
 .shape-stage{display:grid;margin-top:.07em;overflow:hidden;padding:.08em 0 .13em;line-height:1.25;width:100%}
-.shape-layer{grid-area:1/1;display:flex;align-items:center;gap:.22em;white-space:nowrap;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .16s ease,transform .16s ease,visibility .16s;pointer-events:none}
-.shape-layer.is-active{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .6s ease .18s,transform .6s cubic-bezier(.22,.61,.36,1) .18s,visibility 0s .18s}
-.face-0{font-family:var(--sans);font-weight:800}.face-1{font-family:var(--serif);font-weight:600}.face-2{font-family:'Yu Gothic','Hiragino Maru Gothic ProN',sans-serif;font-weight:400;letter-spacing:-.045em}
-.shape-icon{display:block;width:.85em;height:.72em;position:relative;flex:none}.shape-icon:before,.shape-icon:after{content:'';position:absolute;border:.045em solid currentColor}
-.icon-0:before,.icon-0:after{width:65%;height:90%;border-radius:50%;top:0;left:0}.icon-0:after{left:30%}
-.icon-1:before{width:68%;height:85%;left:10%;top:0;border-radius:6%}.icon-1:after{width:68%;height:85%;left:25%;top:15%;border-radius:6%}
-.icon-2:before{width:85%;height:85%;left:5%;top:5%;border-radius:50% 50% 8% 50%}.icon-2:after{width:35%;height:0;left:30%;top:50%;border-width:.02em 0 0}
+/* 「かたち」は同じ言葉のまま、書体・輪郭・間隔だけが入れ替わる。ぼやけた状態から像を結ぶ。 */
+.shape-layer{grid-area:1/1;display:flex;align-items:center;gap:0;white-space:nowrap;opacity:0;visibility:hidden;transform:translateY(.05em) scale(.97);filter:blur(7px);transition:opacity .45s ease,transform .45s ease,filter .45s ease,visibility 0s .45s;pointer-events:none;will-change:opacity,filter,transform}
+.shape-layer.is-active{opacity:1;visibility:visible;transform:none;filter:blur(0);transition:opacity 1s ease .3s,transform 1s cubic-bezier(.22,.61,.36,1) .3s,filter 1s ease .3s,visibility 0s .3s}
+.face-bold{font-family:var(--sans);font-weight:900}
+.face-outline{font-family:var(--sans);font-weight:900;color:transparent;-webkit-text-stroke:.028em var(--paper);paint-order:stroke fill}
+.face-mincho{font-family:var(--serif);font-weight:600;letter-spacing:-.03em}
+.face-light{font-family:var(--sans);font-weight:300;letter-spacing:-.02em}
+.face-wide{font-family:var(--serif);font-weight:400;letter-spacing:.02em;transform:skewX(-7deg)}.face-wide.is-active{transform:skewX(-6deg)}
 html .editorial-hero .cinema-toggle,html .process-motion{width:44px;min-width:44px;height:44px;padding:0;border:1px solid #ffffff55;border-radius:50%;background:#17332555;display:grid;place-items:center;flex:none}
 .editorial-hero .cinema-toggle:before,.process-motion:before{content:'';width:10px;height:13px;border-left:3px solid currentColor;border-right:3px solid currentColor}
 .editorial-hero .cinema-toggle[aria-pressed=true]:before,.process-motion[aria-pressed=true]:before{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid currentColor;border-right:0;margin-left:3px}
 .editorial-hero .cinema-toggle:hover,.process-motion:hover{background:#173325aa}
-@media(prefers-reduced-motion:reduce){.shape-layer{transition:none;transform:none}}
+@media(prefers-reduced-motion:reduce){.shape-layer{transition:none;transform:none;filter:none}}
 .cinema>img{z-index:0}.cinema .film{z-index:1}.cinema .cinema-shade{z-index:2}.cinema .cinema-caption,.cinema .cinema-controls{z-index:3}
 .arrival{position:fixed;inset:0;z-index:90;background:var(--paper);display:flex;align-items:center;justify-content:center;gap:20px;pointer-events:none;animation:arrival-out .45s .65s both}
 .arrival-mark{width:32px;height:32px;background:var(--ink);animation:mark-open .6s both}.arrival-word{font-size:15px;font-weight:700;letter-spacing:.1em}
@@ -36,7 +36,7 @@ html .editorial-hero .cinema-toggle,html .process-motion{width:44px;min-width:44
 /* The film now lives behind the headline itself. */
 @media(max-width:360px){header{gap:10px}header .brand{font-size:35px}nav .nav-contact{white-space:nowrap;font-size:10px;padding:0 12px;gap:9px}}
 .editorial-hero{min-height:calc(100svh - 94px);padding:0 var(--g) 130px;overflow:hidden;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:center}
-.editorial-hero .hero-copy{padding:60px 0 35px;position:relative;z-index:2;pointer-events:none}.editorial-hero .hero-copy a{pointer-events:auto}.editorial-hero .hero-bottom{position:relative;z-index:2;margin-top:10px;font-size:10px;color:#eceee7;pointer-events:none}
+.editorial-hero .hero-copy{padding:60px 0 35px;position:relative;z-index:2;pointer-events:none}.editorial-hero .hero-copy a{pointer-events:auto}.editorial-hero .hero-bottom{position:relative;z-index:2;margin-top:10px;font-size:10px;color:#eceee7;pointer-events:none}.editorial-hero .hero-bottom a{pointer-events:auto;text-underline-offset:4px}
 .editorial-hero .hero-cinema{position:absolute;inset:0;z-index:0;aspect-ratio:auto;min-height:0;margin:0;background:var(--ink)}
 .editorial-hero .cinema-shade{background:linear-gradient(90deg,rgba(16,36,27,.73),rgba(16,36,27,.37)),linear-gradient(0deg,rgba(16,36,27,.55),transparent 50%)}
 .editorial-hero .cinema-caption{display:none}.editorial-hero .cinema-controls{left:var(--g);right:var(--g);bottom:30px;border-top:1px solid #ffffff45;padding-top:18px}
