@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)');
 setTimeout(()=>document.querySelector('.arrival')?.remove(),1400);
-const scenes={conversation:{label:'対話の時間',title:'まずは、話すことから。',file:'conversation-v3.mp4'},notebook:{label:'お店らしさを、かたちに',title:'お店の空気を、そのままサイトに。',file:'notebook-v5.mp4'},seat:{label:'向かい合って、話す',title:'向かい合って、話す。',file:'seat-v1.mp4'}};
+const scenes={conversation:{label:'対話の時間',title:'まずは、話すことから。',file:'conversation-v3.mp4'},notebook:{label:'お店らしさを、かたちに',title:'お店の空気を、そのままサイトに。',file:'notebook-v5.mp4'},seat:{label:'並んで、話す',title:'並んで、話す。',file:'seat-v2.mp4'},sunset:{label:'夕日を、眺める',title:'夕日を、眺める。',file:'sunset-v1.mp4'},room:{label:'午後の部屋',title:'午後の部屋。',file:'room-v1.mp4'}};
 document.querySelector('.arrival')?.addEventListener('animationend',e=>{if(e.animationName==='arrival-out')e.currentTarget.remove()});
 document.querySelectorAll('[data-playlist]').forEach(host=>{
  const ids=host.dataset.playlist.split(',');let current=0,visible=false,paused=reduce.matches;
