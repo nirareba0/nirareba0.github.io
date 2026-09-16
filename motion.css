@@ -43,3 +43,5 @@ html .editorial-hero .cinema-toggle,html .process-motion{width:44px;min-width:44
 .editorial-hero .pill{background:var(--paper);color:var(--ink);border-color:var(--paper)}.editorial-hero .text-link{color:var(--paper)}
 .editorial-hero .speech{background:var(--paper)}.editorial-hero .speech:after{border-color:var(--ink)}
 @media(max-width:700px){.editorial-hero{min-height:calc(100svh - 78px);padding:0 var(--g) 155px;justify-content:flex-start}.editorial-hero .hero-copy{padding:42px 0 20px}.editorial-hero h1{font-size:clamp(29px,9vw,63px)}.editorial-hero .hero-bottom{font-size:9px;max-width:30em}.editorial-hero .cinema-controls{bottom:20px;padding-top:14px}.editorial-hero .cinema-shade{background:linear-gradient(90deg,#10241bcc,#10241b70),linear-gradient(0deg,#10241b90,transparent)}.editorial-hero .hero-intro{font-size:12px}.editorial-hero .scene-select{width:auto}.editorial-hero .cinema-toggle{min-width:95px}.editorial-hero .hero-description{gap:18px}}
+.cinema-note{font-size:10px;letter-spacing:.06em;color:#e3e8df;align-self:center;opacity:.85}
+html .editorial-hero .cinema-controls{justify-content:space-between}
