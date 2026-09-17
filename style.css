@@ -24,3 +24,4 @@ html{scroll-behavior:auto}.pill:hover,.work:hover .work-preview{transform:none}.
 .result-handoff{font-size:10px;color:var(--muted);line-height:1.8;margin:12px 0 18px}
 .process-head p{max-width:34em}
 .nowrap{white-space:nowrap}
+.activity-image.tile{display:grid;place-items:center;background:var(--sage);color:var(--ink)}.activity-image.tile span{font:italic 44px Georgia,serif;letter-spacing:.02em}
