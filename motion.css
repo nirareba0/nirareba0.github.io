@@ -43,3 +43,53 @@ html .editorial-hero .cinema-toggle,html .process-motion{width:44px;min-width:44
 .editorial-hero .pill{background:var(--paper);color:var(--ink);border-color:var(--paper)}.editorial-hero .text-link{color:var(--paper)}
 .editorial-hero .speech{background:var(--paper)}.editorial-hero .speech:after{border-color:var(--ink)}
 @media(max-width:700px){.editorial-hero{min-height:calc(100svh - 78px);padding:0 var(--g) 155px;justify-content:flex-start}.editorial-hero .hero-copy{padding:42px 0 20px}.editorial-hero h1{font-size:clamp(29px,9vw,63px)}.editorial-hero .hero-bottom{font-size:9px;max-width:30em}.editorial-hero .cinema-controls{bottom:20px;padding-top:14px}.editorial-hero .cinema-shade{background:linear-gradient(90deg,#10241bcc,#10241b70),linear-gradient(0deg,#10241b90,transparent)}.editorial-hero .hero-intro{font-size:12px}.editorial-hero .scene-select{width:auto}.editorial-hero .cinema-toggle{min-width:95px}.editorial-hero .hero-description{gap:18px}}
+/* 2026-09-25 読みやすさ（style.css 末尾と対。motion.css が後に読まれるため、ここでも上書きする） */
+.hero-kicker{font-size:12px}.editorial-hero .hero-bottom{font-size:12px}.editorial-hero .hero-intro{font-size:15px}
+@media(max-width:700px){.hero-kicker{font-size:11px}.editorial-hero .hero-bottom{font-size:11px}.editorial-hero .hero-intro{font-size:14px}}
+/* 「かたち」の枠を最も広い書体に合わせて詰める（3.12em だと太字のとき前後に 0.15em ずつ空き、「かたち␣にする」に見えた） */
+.creation-line .shape-stage{width:2.9em;flex-basis:2.9em}.creation-line .shape-layer{justify-content:flex-start}.face-wide{letter-spacing:-.02em}
+
+/* 2026-09-25 第2回（specs/design-research-2026-09.md の上位10から、既存の事実だけで書けるもの） */
+:root{--serif:'Shippori Mincho','Yu Mincho','Hiragino Mincho ProN',serif}
+body{text-autospace:normal}h2,h3,.cinema-title{text-wrap:balance;font-feature-settings:'palt'}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* 本文16px基準・補助文13px以上 */
+.body-copy,.service-copy .body-copy,.estimate-intro .body-copy,.contact .body-copy,.profile-story,.activity p:not(.activity-role),.activity-intro{font-size:16px;line-height:1.95}
+.editorial-hero .hero-intro,.process-head p,.step p{font-size:15.5px;line-height:1.95}.service-copy ul,.works-head p,.result-list,.profile-facts,.coaching .detail{font-size:14.5px}
+.section-label,.note,.activity-role,.activity-links-note,.contact small,.work-meta p,.result-note,.result-handoff,.selection,.quiz-bottom small,.quiz-top,.new-tab,footer p,.footer-links,.step small,.hero-kicker,.editorial-hero .hero-bottom{font-size:13px}
+.option small{font-size:13px}
+@media(max-width:700px){.body-copy,.service-copy .body-copy,.estimate-intro .body-copy,.contact .body-copy,.profile-story,.activity p:not(.activity-role),.activity-intro{font-size:15px;line-height:1.95}
+.editorial-hero .hero-intro,.process-head p,.step p{font-size:14.5px}.section-label,.note,.activity-role,.activity-links-note,.contact small,.work-meta p,.result-note,.result-handoff,.selection,.quiz-bottom small,.quiz-top,.new-tab,footer p,.footer-links,.step small,.hero-kicker,.editorial-hero .hero-bottom{font-size:12.5px}}
+/* 料金の一覧（クイズの外にも静的に出す） */
+.price-table{margin-top:48px}.price-table h3{font-family:var(--serif);font-size:26px;margin-bottom:12px}.price-lead{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:20px}
+.price-table table{width:100%;border-collapse:collapse;font-size:15px}.price-table th,.price-table td{border-top:1px solid var(--line);padding:14px 0;text-align:left;vertical-align:top;font-weight:500}
+.price-table thead th{font-size:12.5px;color:var(--muted);padding:8px 0;border-top:0}.price-table td{text-align:right;white-space:nowrap;font-family:Georgia,var(--serif);font-size:17px;padding-left:20px}
+.price-table tbody th small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:4px;line-height:1.7}.price-table tr.group th,.price-table tr.group td{border-top:1px solid var(--ink)}
+/* よくある質問 */
+.faq{padding:95px var(--g);border-top:1px solid var(--line);display:grid;grid-template-columns:.85fr 1.15fr;gap:7vw;align-items:start}.faq .section-label{grid-column:1/-1;margin-bottom:0}
+.faq-list details{border-top:1px solid var(--line)}.faq-list details:last-child{border-bottom:1px solid var(--line)}
+.faq-list summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center;min-height:64px;padding:16px 0;font-size:16px;font-weight:600}
+.faq-list summary::-webkit-details-marker{display:none}.faq-list summary:after{content:'+';font-size:22px;flex:none}.faq-list details[open] summary:after{content:'−'}
+.faq-list details p{font-size:15px;line-height:1.95;padding:0 0 22px;max-width:36em}
+/* 問い合わせのあとに起きること */
+.contact-steps{list-style:none;padding:0;margin:0 0 34px;display:grid;gap:10px;max-width:40em}.contact-steps li{display:flex;gap:18px;font-size:15px;line-height:1.8;border-top:1px solid #ffffff30;padding-top:10px}
+.contact-steps span{font:italic 17px/1.6 Georgia,serif;color:#c7d7ba;flex:none}
+@media(max-width:700px){.faq{grid-template-columns:1fr;gap:28px;padding:65px var(--g)}.faq-list summary{font-size:15px}.faq-list details p{font-size:14.5px}.price-table table{font-size:14px}.price-table td{font-size:15px;padding-left:12px}.contact-steps li{font-size:14px}}
+/* Shippori Mincho はかなが小さく、同じ字間でも開いて見える。見出しだけ詰める */
+h2,.service-copy h3,.step h3,.activity h3,.about-heading,.quiz h3,.price-table h3{letter-spacing:-.07em}.about-name{letter-spacing:.02em}
+/* ボタンの文字も本文に合わせて上げる（12〜13px だと主導線が一番小さい文字になっていた） */
+.pill{font-size:15px}.result .pill{font-size:14px}nav .nav-contact{font-size:13.5px}
+@media(max-width:700px){.pill{font-size:14.5px}nav .nav-contact{font-size:12.5px}}
+/* 2026-09-25 第3回（独立レビュー 7.0/10 の指摘から） */
+.editorial-hero .hero-bottom{padding-left:0;margin-left:0;left:0}
+.price-table td{font-variant-numeric:lining-nums tabular-nums;font-feature-settings:'lnum','tnum'}.price-table tr.group th,.price-table tr.group td{border-top-color:var(--line)}
+.note,.profile-note,.new-tab,.activity-links-note,.result-handoff,.quiz-bottom small,.price-lead{color:#4f5a50}.contact small{color:#dfe6d9}
+.profile-note{font-size:13.5px}
+p,li,dd,summary{text-wrap:pretty}
+.portrait{object-position:50% 22%;filter:saturate(.86)}
+/* 地域での活動: 画像枠を統一（写真は全面、ポスター・ロゴは余白つきで中に収める） */
+.activity-image{height:auto;aspect-ratio:16/10;background:var(--paper)}.activity-image.poster,.activity-image.logo{padding:22px}.activity-image.poster img,.activity-image.logo img{object-fit:contain;background:transparent}
+.activity-role{font-size:13px}
+/* 映像と生成写真に、ごく薄い粒子（均一なソフトフォーカスの「生成っぽさ」を消す） */
+.hero-cinema:after,.service-art:after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(max-width:700px){.activity-image{height:auto}.activity-image.poster,.activity-image.logo{padding:16px}footer{display:grid;gap:16px}footer p{text-align:left}.subnav{padding:6px var(--g)}}

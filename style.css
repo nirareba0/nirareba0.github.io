@@ -26,3 +26,18 @@ html{scroll-behavior:auto}.pill:hover,.work:hover .work-preview{transform:none}.
 .nowrap{white-space:nowrap}
 .activity-image.tile{display:grid;place-items:center;background:var(--sage);color:var(--ink)}.activity-image.tile span{font:italic 44px Georgia,serif;letter-spacing:.02em}
 .free{font:34px/1.4 var(--serif);margin:7px 0 12px}
+
+/* 2026-09-25 読みやすさ: 本文の最小を 14px（スマホ）/15px（PC）に。小さな注記も 11px を下限にする */
+.hero-intro,.editorial-hero .hero-intro{font-size:15px;line-height:2}.process-head p,.step p{font-size:14.5px}.step small{font-size:12px}
+.body-copy,.service-copy .body-copy,.estimate-intro .body-copy,.contact .body-copy,.profile-story,.activity p:not(.activity-role),.activity-intro{font-size:15.5px;line-height:2.05}
+.service-copy ul{font-size:14px}.works-head p{font-size:14px}.work-meta h3{font-size:16px}.work-meta p{font-size:12px}.new-tab{font-size:11px}
+nav{font-size:13px}.text-link{font-size:13px}.section-label{font-size:12px}.note{font-size:12px}.quiz-bottom small,.quiz-top{font-size:11.5px}
+.option strong{font-size:15px}.option small{font-size:12.5px}.result-list{font-size:14px}.result-note,.result-handoff{font-size:12px}.monthly{font-size:14px}.selection{font-size:12px}
+.profile-facts{font-size:13.5px}.profile-note{font-size:13px}.coaching summary{font-size:15px}.coaching .detail{font-size:14px}.role{font-size:13px}.activity-role{font-size:12px}.activity-links-note{font-size:12px}
+.contact small{font-size:12px}footer p,.footer-links{font-size:12px}.hero-kicker{font-size:12px}.editorial-hero .hero-bottom{font-size:12px}
+/* できることの画像は比率で持つ（固定高さだとスマホで左右が切れ、画面の中身が見えなくなる） */
+.service-art{height:auto;aspect-ratio:16/9}.service-art .scene-media{object-position:60% 50%}
+@media(max-width:700px){.hero-intro,.editorial-hero .hero-intro{font-size:14px}.process-head p,.step p{font-size:14px}.step small{font-size:11.5px}
+.body-copy,.service-copy .body-copy,.estimate-intro .body-copy,.contact .body-copy,.profile-story,.activity p:not(.activity-role),.activity-intro{font-size:14.5px;line-height:2}
+.service-copy ul{font-size:13.5px}.works-head p{font-size:13.5px}.text-link{font-size:13px}.section-label{font-size:11px}.option strong{font-size:14.5px}.option small{font-size:12px}
+.profile-facts{font-size:13px}.editorial-hero .hero-bottom{font-size:11px}.hero-kicker{font-size:11px}footer p{font-size:11px}.service-art{height:auto}}
