@@ -1,18 +1,27 @@
 (()=>{'use strict';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-// Three-step estimate. No personal details, requests or persistent storage.
-const FORM='https://docs.google.com/forms/d/e/1FAIpQLSd0KixjZ9qp4IN2YhDHNsjw01QhMLWU0YslcL0QJP-TNa-7_g/viewform';const kinds={web:'ホームページ作成',creative:'ホームページ作成',audit:'AI導入（予約・シフトなどの業務効率化）',implement:'AI導入（予約・シフトなどの業務効率化）',training:'AI研修・伴走（企業・団体）',talk:'その他・まだわからない'};
-function formUrl(kind,text){const u=new URL(FORM);u.searchParams.set('usp','pp_url');if(kind)u.searchParams.set('entry.281944218',kind);if(text)u.searchParams.set('entry.326506747',text);return u.href}
-const state={step:0,service:null,need:null,support:null};const labels={web:'ホームページづくり',ai:'AI導入・活用',unsure:'何から始めるか相談'};
-const plans={web:{title:'ホームページ制作',price:330000,items:['対話2回・構成と原稿の作成','5ページ程度までの設計・デザイン・実装','スマホ対応・公開・操作説明'],note:'撮影・ドメイン・サーバーなどの実費、追加機能は別途お見積もりします。'},creative:{title:'映像・独自演出を含むサイト制作',price:550000,items:['ホームページ制作の基本内容','映像の企画・生成・編集','スクロールに合わせた独自の演出'],note:'場面数やページ数、機能によって費用が変わります。撮影・ドメイン・サーバーなどの実費は別途です。'},audit:{title:'AI活用の棚卸し',price:33000,fixed:true,items:['2時間の対話で、業務を棚卸し','AIを活用する候補と優先順位の提案','いちばん手軽な1つを、その場で一緒につくって渡す'],note:'画面を共有しながら、つくる様子を見ていただきます。導入・開発・研修の費用は含みません。'},implement:{title:'AI導入・業務改善',price:165000,items:['対象業務1つの設計・設定・実装','ご自身で操作できるまでの説明','導入後30日の質問対応'],note:'AIツールの利用料・API料金は別途です。複数業務や追加開発は別途お見積もりします。'},training:{title:'AI実践研修',price:165000,fixed:true,items:['事前ヒアリング','3時間・5名までの業務に合わせた演習','仕事の中での使い方を整理'],note:'AIツールの利用料、訪問時の交通費は別途です。人数や研修時間の追加はお見積もりします。'},talk:{title:'まずは、相談内容を整理するところから。',price:null,free:true,items:['考えていること、困っていることを聞かせてください','必要な支援と、その範囲を一緒に確認','有料の支援に進む前に、内容と費用をご案内'],note:'この段階では金額を決めず、内容を伺ってからご案内します。'}};
-function supportLabel(v){return {ongoing:'継続サポートを希望',self:'継続：自分で使えるようになりたい',delegate:'継続：改善作業も任せたい',none:'今回の内容のみ'}[v]||'継続は相談後に'}
-function option(value,title,desc=''){return '<button class="option" type="button" data-value="'+value+'"><span><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</span><span aria-hidden="true">↗</span></button>'}
-function render(focus=true){const body=$('#quiz-body');$('#quiz').hidden=false;$('#quiz-count').textContent=state.step<3?'質問 '+(state.step+1)+' / 3':'相談の入口と費用の目安';$$('.dots i').forEach((x,i)=>x.classList.toggle('active',state.step>=i));$('#quiz-back').hidden=state.step===0;$('#quiz-back').textContent=state.step===3?'← 選び直す':'← ひとつ戻る';$('#quiz-help').textContent=state.step===3?'この診断でお申し込みにはなりません。':'近いものを選んでください。';
-if(state.step===0){body.innerHTML='<h3 tabindex="-1">今、気になっていることは？</h3><div class="quiz-options">'+option('web','ホームページをつくりたい','新しくつくる・今のサイトを見直す')+option('ai','仕事にAIを取り入れたい','業務の整理・導入・使い方を学ぶ')+option('unsure','まだ、うまく言葉にできない','話しながら整理したい')+'</div>';}
-if(state.step===1){let opts;if(state.service==='web')opts=option('web','事業が伝わるサイトをつくる','言葉・構成・デザインから相談')+option('creative','映像や動きにも、こだわりたい','独自の表現までつくり込みたい')+option('talk','まずは必要な内容を相談したい');else if(state.service==='ai')opts=option('audit','どの仕事に使えるか、整理したい','業務の棚卸しと導入方針')+option('implement','具体的な仕事を、使いやすくしたい','1つの業務への導入・仕組みづくり')+option('training','自分やチームで、使い方を学びたい','業務に合わせた実践研修');else opts=option('talk','事業の伝え方を相談したい')+option('audit','仕事の困りごとを整理したい')+option('talk','何を頼めるか聞いてみたい');body.innerHTML='<h3 tabindex="-1">どんなところから始めたいですか？</h3><div class="quiz-options">'+opts+'</div>';}
-if(state.step===2){const website=['web','creative'].includes(state.need)||state.service==='web';body.innerHTML='<h3 tabindex="-1">その後のサポートは？</h3><div class="quiz-options">'+option('none','まずは、今回の内容だけ','継続サポートはつけずに考える')+(website?option('ongoing','公開後の更新も、相談したい','文章・画像の軽微な更新'):option('self','自分でも使えるようになりたい','月2回の対話で、使い方と次の一手を一緒に考える')+option('delegate','改善作業も、続けて任せたい','チーム向け。定例と改善作業まで'))+option('later','話してから決めたい','今は決めなくて大丈夫です')+'</div>';}
-if(state.step===3){const p=plans[state.need],web=['web','creative'].includes(state.need)||state.service==='web',monthly=p.price===null?0:({ongoing:11000,self:22000,delegate:55000}[state.support]||0);const price=p.price===null?'<p class="price-label">最初の相談（30分）</p><p class="free">無料</p><p class="body-copy">内容を伺ってから、お見積もりします。</p>':'<p class="price-label">初期費用の目安（税込）</p><p class="price">'+(p.price/10000).toLocaleString('ja-JP')+'<small>万円'+(p.fixed?'':'〜')+'</small></p>';const m=monthly?'<p class="monthly">継続サポート：<strong>月'+(monthly/10000)+'万円'+(state.support==='self'?'':'〜')+'（税込）</strong><br><small>'+({ongoing:'軽微な文章・画像更新、月2件まで。',self:'月2回・60分の対話＋チャットでの質問。月ごとの契約で、いつでも止められます。次にAIを使う仕事をご自身で選んで組めたら、卒業です。',delegate:'月1回90分の定例＋チャット・改善作業。月5時間相当まで。新規開発は別途。'}[state.support])+'</small></p>':'<p class="monthly">'+(state.support==='none'?'継続サポートは含みません。':'継続サポートの内容・費用は相談後に決定。')+'</p>';const supportText=supportLabel(state.support);const handoff=formUrl(kinds[state.need],'【サイトの診断結果】'+p.title+(p.price===null?'':'（目安 '+(p.price/10000).toLocaleString('ja-JP')+'万円'+(p.fixed?'':'〜')+'）')+'／'+supportText+'\n\n');const contactPill=$('#contact-form');if(contactPill)contactPill.href=handoff;
-body.innerHTML='<div class="result"><p class="result-eyebrow">あなたの相談の入口</p><h3 tabindex="-1">'+p.title+'</h3><p class="selection">'+labels[state.service]+' ／ '+supportLabel(state.support)+'</p>'+price+m+'<ul class="result-list">'+p.items.map(x=>'<li>'+x+'</li>').join('')+'</ul><p class="result-note">'+p.note+'<br>これは概算です。正式な金額・期間・対応範囲は、ご相談後のお見積もりで確定します。</p><a class="pill" href="'+handoff+'" target="_blank" rel="noopener noreferrer">この内容で、フォームから話してみる <span aria-hidden="true">↗</span></a><p class="result-handoff">選んだ内容がフォームの下書きに入ります。送るまで届きません。<br>外部サービスが新しいタブで開きます。</p><button type="button" class="plain-button" id="restart">最初からやり直す</button></div>';$('#restart').addEventListener('click',()=>{Object.assign(state,{step:0,service:null,need:null,support:null});render()});}
-body.querySelectorAll('[data-value]').forEach(b=>b.addEventListener('click',()=>{const value=b.dataset.value;if(state.step===0){state.service=value;state.need=null;state.support=null}else if(state.step===1){state.need=value;state.support=null}else state.support=value;state.step++;render()}));if(focus){body.querySelector('h3').focus({preventScroll:true});if($('#quiz').getBoundingClientRect().top<0)$('#quiz').scrollIntoView({behavior:'instant',block:'start'})}}
-$('#quiz-back').addEventListener('click',()=>{if(state.step>0)state.step--;render()});$$('[data-start]').forEach(a=>a.addEventListener('click',()=>{Object.assign(state,{step:1,service:a.dataset.start,need:null,support:null});render(false)}));render(false);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// 名刺を裏返す
+const card=document.querySelector('.card'),flip=document.querySelector('.card-flip');
+if(card&&flip){
+  const front=card.querySelector('.card-front'),back=card.querySelector('.card-back');
+  const set=b=>{card.dataset.side=b?'back':'front';flip.setAttribute('aria-pressed',String(b));flip.textContent=b?'名刺の表を見る':'名刺の裏を見る';front.setAttribute('aria-hidden',String(b));back.setAttribute('aria-hidden',String(!b));};
+  set(false);
+  flip.addEventListener('click',()=>set(card.dataset.side!=='back'));
+}
+
+// ふたりの態度が、順に変わる
+const pair=document.querySelector('.pair');
+if(pair){
+  const a=pair.querySelector('.pair-a'),b=pair.querySelector('.pair-b'),cap=document.querySelector('.pair-caption'),replay=document.querySelector('.pair-replay');
+  const steps=[['back','back','ふたりとも、腕を組んでいる。'],['lean','back','ひとりが、身を乗り出す。'],['lean','lean','もうひとりも、乗ってくる。'],['up','up','ウケた。']];
+  let timers=[];
+  const show=i=>{const s=steps[i];a.dataset.pose=s[0];b.dataset.pose=s[1];pair.dataset.step=i;cap.textContent=s[2];};
+  const play=()=>{timers.forEach(clearTimeout);timers=[];if(reduce){show(3);return;}show(0);[1,2,3].forEach((i,k)=>timers.push(setTimeout(()=>show(i),900+k*1300)));};
+  replay.addEventListener('click',play);
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){play();io.disconnect();}},{threshold:.5});
+    io.observe(pair);
+  }else show(3);
+}
 })();
