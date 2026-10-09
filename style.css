@@ -277,3 +277,9 @@ main>.hero{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;animation:none!important}
 }
+
+/* privacy.html */
+.doc-main{max-width:760px;margin:0 auto;padding:56px var(--gut) 96px}
+.doc-main h1{font-size:clamp(30px,5vw,44px);margin:12px 0 24px}
+.doc-main h2{font-size:20px;margin:36px 0 10px}
+.doc-main p{margin-top:10px}
