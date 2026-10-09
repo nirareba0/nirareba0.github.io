@@ -5,7 +5,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const card=document.querySelector('.card'),flip=document.querySelector('.card-flip');
 if(card&&flip){
   const front=card.querySelector('.card-front'),back=card.querySelector('.card-back');
-  const set=b=>{card.dataset.side=b?'back':'front';flip.setAttribute('aria-pressed',String(b));flip.textContent=b?'名刺の表を見る':'名刺の裏を見る';front.setAttribute('aria-hidden',String(b));back.setAttribute('aria-hidden',String(!b));};
+  const set=b=>{card.dataset.side=b?'back':'front';flip.textContent=b?'名刺の表を見る':'名刺の裏を見る';front.setAttribute('aria-hidden',String(b));back.setAttribute('aria-hidden',String(!b));};
   set(false);
   flip.addEventListener('click',()=>set(card.dataset.side!=='back'));
 }
