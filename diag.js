@@ -28,13 +28,13 @@ const QUESTIONS=[
 
 // ゴールとなるソリューション
 const GOALS={
- s0:{name:'きもちが乗らない日も、たいどで運べる',desc:'朝、会議、お客さんの前。気分に左右されない、自分のたいどの型を持てる。',svc:'たいどを学ぶ（1対1・たいどの教室）',icon:'i-heart'},
- s2:{name:'場面ごとのたいどが、決まる',desc:'お客さんの前、職場、はじめての人。場面ごとの「ちょうどいいふるまい」と、言うこと・言わないことが決まる。',svc:'たいどを考える',icon:'i-person'},
- s3:{name:'ひとことの自己紹介が、決まる',desc:'名刺交換で「それ、どういうこと？」と聞き返される、ひとこと。',svc:'たいどを考える（ひとこと）／1対1のコーチング',icon:'i-talk'},
- s4:{name:'伝わる場所に、出せる',desc:'ホームページ、求人、SNS、店頭。合うお客さんと合う人が来る出し方。持続化補助金が使えることも。',svc:'たいどを出す',icon:'i-out'},
- s5:{name:'職場で、乗りあえる',desc:'会議で意見が出る。言い方ひとつでぎくしゃくしない。お互いのたいどを、お互いがつくる。',svc:'たいどの教室（チーム）',icon:'i-swap'},
- s6:{name:'ずれても、戻せる',desc:'相手からどう返ってきたかを月に一度見て、ずれたらたいどを直す。',svc:'作用を見る（編集長）',icon:'i-loop'},
- s1:{name:'きもちの奥が、言葉になる',desc:'乗らない日の奥にある、ほんとうに大事にしたいことを、自分の言葉で言える。',svc:'きもちを聞く／1対1のコーチング',icon:'i-book'},
+ s0:{name:'きもちが乗らない日も、たいどで運べる',desc:'朝、会議、お客さんの前。気分に左右されない、自分のたいどの型を持てる。',svc:'1on1・コーチング／チームビルディング・研修',icon:'i-heart'},
+ s2:{name:'場面ごとのたいどが、決まる',desc:'お客さんの前、職場、はじめての人。場面ごとの「ちょうどいいふるまい」と、言うこと・言わないことが決まる。',svc:'理念・クレドづくり／チームビルディング・研修',icon:'i-person'},
+ s3:{name:'ひとことの自己紹介が、決まる',desc:'名刺交換で「それ、どういうこと？」と聞き返される、ひとこと。',svc:'1on1・コーチング／ブランディング',icon:'i-talk'},
+ s4:{name:'伝わる場所に、出せる',desc:'ホームページ、求人、SNS、店頭。合うお客さんと合う人が来る出し方。',svc:'採用広報・求人／ブランディング・ホームページ制作／SNS・発信の運用',icon:'i-out'},
+ s5:{name:'職場で、乗りあえる',desc:'会議で意見が出る。言い方ひとつでぎくしゃくしない。お互いのたいどを、お互いがつくる。',svc:'社内コミュニティづくり／チームビルディング・研修',icon:'i-swap'},
+ s6:{name:'ずれても、戻せる',desc:'相手からどう返ってきたかを月に一度見て、ずれたらたいどを直す。',svc:'SNS・発信の運用／1on1・コーチング（月に一度の見直し）',icon:'i-loop'},
+ s1:{name:'きもちの奥が、言葉になる',desc:'乗らない日の奥にある、ほんとうに大事にしたいことを、自分の言葉で言える。',svc:'1on1・コーチング',icon:'i-book'},
 };
 
 // 6つの型。距離があることを責めない。たいどで楽になれるところを言う
@@ -112,9 +112,9 @@ function result(){
   <div class="r-bars">${bar('きもち','FEELING',s.k)}${bar('たいど','TAIDO',s.t)}${bar('作用','EFFECT',s.e)}</div>
   <div class="r-why"><h3>なぜ、この結果？ たいどで、どこが楽になる？</h3><p>${T.why}</p></div>
   <div class="r-tip"><h3>今日からできる、小さなたいど</h3><p>${T.tip}</p></div>
-  <div class="r-goals"><h3>めざせるゴール</h3><ol>${T.goals.map(g=>`<li>${icon(GOALS[g].icon,'ic ic-l')}<div><p class="g-name">${GOALS[g].name}</p><p>${GOALS[g].desc}</p><p class="g-svc">たいどの手法：${GOALS[g].svc}</p></div></li>`).join('')}</ol></div>
+  <div class="r-goals"><h3>めざせるゴール</h3><ol>${T.goals.map(g=>`<li>${icon(GOALS[g].icon,'ic ic-l')}<div><p class="g-name">${GOALS[g].name}</p><p>${GOALS[g].desc}</p><p class="g-svc">たいどのしごと：${GOALS[g].svc}</p></div></li>`).join('')}</ol></div>
   <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたの毎日のたいどの話を聞かせてください。</p>
-  <div class="actions"><a class="cta" href="${formUrl}" target="_blank" rel="noopener noreferrer">結果をもって、30分話す</a><a class="more" href="index.html#service">手法と値段を見る</a></div>
+  <div class="actions"><a class="cta" href="${formUrl}" target="_blank" rel="noopener noreferrer">結果をもって、30分話す</a><a class="more" href="index.html#service">しごとを見る</a></div>
   <p class="note">フォームには診断の結果だけが入ります。回答そのものは、どこにも送っていません。</p></div>
   <div class="r-foot"><a class="share" href="${shareUrl}" target="_blank" rel="noopener noreferrer">結果を X でシェアする ↗</a><button type="button" class="q-back r-again">もう一度やる</button></div>
   <p class="note">この診断は心理検査ではありません。たいどで楽になれるところに気づくための、きっかけです。</p>

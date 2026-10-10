@@ -329,3 +329,16 @@ button.cta-btn{font:inherit;font-weight:500;letter-spacing:.16em;font-size:20px;
 .steps{grid-template-columns:repeat(5,minmax(0,1fr));gap:22px}
 @media (max-width:1100px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* しごと：よく知られた名前＋たいどのアプローチ */
+.svc-groups{display:grid;gap:56px;margin-top:48px}
+.svc-group-h{display:flex;align-items:baseline;gap:14px;font-size:15px;font-weight:500;letter-spacing:.2em;margin-bottom:6px}
+.svc-group-h .en{display:inline;color:var(--blue);font-size:12px}
+.svc-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 32px}
+.svc-group:nth-child(2) .svc-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+.svc-list li{border-top:1.5px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:10px}
+.svc-list h3{font-size:19px;letter-spacing:.1em;line-height:1.5}
+.svc-how{font-size:14px;font-weight:500;color:var(--blue);letter-spacing:.06em;line-height:1.8}
+.svc-list p:not(.svc-how){font-size:14px;line-height:1.95;color:var(--muted)}
+@media (max-width:1000px){.svc-list,.svc-group:nth-child(2) .svc-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.svc-list,.svc-group:nth-child(2) .svc-list{grid-template-columns:minmax(0,1fr)}}
