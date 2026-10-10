@@ -1,4 +1,9 @@
 /* たいど — 名刺に合わせた版（紙・墨の細線・青の帯） */
+/* 書体は使っている字だけを切り出して自前配信（tools/subset_card_fonts.py。文言を変えたら回し直す）。SIL OFL — assets/fonts/OFL-*.txt */
+@font-face{font-family:"Zen Kaku Gothic New";font-weight:400;font-display:swap;src:url(assets/fonts/zenkaku-400.woff2) format("woff2")}
+@font-face{font-family:"Zen Kaku Gothic New";font-weight:500;font-display:swap;src:url(assets/fonts/zenkaku-500.woff2) format("woff2")}
+@font-face{font-family:"Zen Kaku Gothic New";font-weight:700;font-display:swap;src:url(assets/fonts/zenkaku-700.woff2) format("woff2")}
+@font-face{font-family:"Josefin Sans";font-weight:400 500;font-display:swap;src:url(assets/fonts/josefin.woff2) format("woff2")}
 :root{
   --paper:#fcf7ef; --paper2:#fffdf8; --ink:#141414; --muted:#5b574f; --rule:#ddd5c5; --blue:#015ad2;
   --band:16px; --max:1120px; --gut:clamp(20px,5vw,64px);
