@@ -14,6 +14,23 @@ document.querySelectorAll('svg.ic').forEach(svg=>{
   use.remove();
 });
 
+// 公式LINE：body の data-line-url（友だち追加 URL）を使う。REPLACE-ME のあいだは準備中
+const lineUrl=document.body.dataset.lineUrl||'';
+const linePending=!lineUrl||/REPLACE-ME/.test(lineUrl);
+const toast=msg=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('p');t.className='toast';t.setAttribute('role','status');document.body.appendChild(t)}t.textContent=msg;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2600)};
+window.taidoLine=root=>(root||document).querySelectorAll('a[data-line]').forEach(a=>{
+  if(!a.getAttribute('href')||/REPLACE-ME/.test(a.getAttribute('href')))a.href=lineUrl||'#';
+  if(linePending&&!a.dataset.bound){a.dataset.bound='1';a.addEventListener('click',e=>{if(editing)return;e.preventDefault();toast('公式LINEは準備中です。いまはフォームからどうぞ。')})}
+});
+window.taidoLine(document);
+
+// スマホの画面の下に、距離診断と LINE の固定ボタン（編集モードでは出さない）
+if(!editing&&!document.body.classList.contains('page-diag')){
+  const bar=document.createElement('nav');bar.className='mbar';bar.setAttribute('aria-label','すぐに相談する');
+  bar.innerHTML='<a href="shindan.html">距離診断（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
+  document.body.appendChild(bar);window.taidoLine(bar);
+}
+
 // アイコンを描く：黒い線 → 青い線の順
 const draw=svg=>{svg.classList.remove('drawn');void svg.getBoundingClientRect();svg.classList.add('drawn')};
 

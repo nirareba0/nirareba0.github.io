@@ -103,6 +103,9 @@ function result(){
   const bar=(label,en,v)=>`<div class="r-bar"><p><span class="en">${en}</span>${label}</p><div class="r-track"><span style="--w:${v/6*100}%"></span></div><p class="r-num">${v}<small>/6</small></p></div>`;
   const summary=`【きもちとたいどの距離診断】${T.name}（きもち${s.k}・たいど${s.t}・作用${s.e}／6）`;
   const formUrl=FORM+'?usp=pp_url&entry.326506747='+encodeURIComponent(summary+'\n30分の相談を希望します。\n');
+  // 公式LINE：ID があれば結果を入れたトークを開く。無ければ友だち追加の URL
+  const lineId=document.body.dataset.lineId||'', lineBase=document.body.dataset.lineUrl||'';
+  const lineUrl=lineId?'https://line.me/R/oaMessage/'+encodeURIComponent(lineId)+'/?'+encodeURIComponent(summary+'\n30分の相談を希望します。'):lineBase;
   const shareText=`きもちとたいどの距離診断で「${T.name}」でした。`;
   const shareUrl='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
   app.innerHTML=`<div class="r">
@@ -115,12 +118,14 @@ function result(){
   <div class="r-tip"><h3>今日からできる、小さなたいど</h3><p>${T.tip}</p></div>
   <div class="r-goals"><h3>めざせるゴール</h3><ol>${T.goals.map(g=>`<li>${icon(GOALS[g].icon,'ic ic-l')}<div><p class="g-name">${GOALS[g].name}</p><p>${GOALS[g].desc}</p><p class="g-svc">たいどのしごと：${GOALS[g].svc}</p></div></li>`).join('')}</ol></div>
   <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたの毎日のたいどの話を聞かせてください。</p>
-  <div class="actions"><a class="cta" href="${formUrl}" target="_blank" rel="noopener noreferrer">結果をもって、30分話す</a><a class="more" href="index.html#service">しごとを見る</a></div>
-  <p class="note">フォームには診断の結果だけが入ります。回答そのものは、どこにも送っていません。</p></div>
+  <div class="contact-ways"><a class="way-btn way-line" data-line href="${lineUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>結果をLINEで送る</strong><small>友だち追加して、そのまま相談へ</small></span></a><a class="way-btn" href="${formUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><strong>結果をフォームで送る</strong><small>型と点数が入った状態で開きます</small></span></a></div>
+  <p class="r-more"><a class="more" href="index.html#service">しごとを見る</a></p>
+  <p class="note">LINE・フォームに入るのは診断の結果（型と点数）だけです。回答そのものは、どこにも送っていません。</p></div>
   <div class="r-foot"><a class="share" href="${shareUrl}" target="_blank" rel="noopener noreferrer">結果を X でシェアする ↗</a><button type="button" class="q-back r-again">もう一度やる</button></div>
   <p class="note">この診断は心理検査ではありません。たいどで楽になれるところに気づくための、きっかけです。</p>
   </div>`;
   inline(app);
+  window.taidoLine&&window.taidoLine(app);
   app.querySelector('.r-name').focus({preventScroll:true});
   app.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   requestAnimationFrame(()=>app.querySelector('.r-bars').classList.add('on'));
