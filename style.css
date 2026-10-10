@@ -387,3 +387,23 @@ button.cta-btn{font:inherit;font-weight:500;letter-spacing:.16em;font-size:20px;
   .mbar a+a{background:var(--ink);color:var(--paper)}
   body:has(.mbar){padding-bottom:52px}
 }
+
+/* たいどは技術：4つの技術・外の人が入る理由・チェックの結果 */
+.layers-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.layers-mini{margin-top:40px}
+.layers-mini li:not(:last-child)::after,.layers-mini li:not(:last-child)::before{display:none}
+.checkband{border-top:1.5px solid var(--ink)}
+.why-list{list-style:none;padding:0;margin:44px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.why-list li{border-top:1.5px solid var(--ink);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+.why-no{font:500 26px/1 var(--en);color:var(--blue)}
+.why-list h3{font-size:20px;letter-spacing:.12em}
+.why-list p:not(.why-no){font-size:14.5px;line-height:1.95;color:var(--muted)}
+.r-score{margin-top:6px;font:500 48px/1 var(--en)}
+.r-score small{font-size:18px;color:var(--muted)}
+.r-grow,.r-outside{margin-top:44px;max-width:860px}
+.r-grow h3 span{color:var(--blue)}
+.r-strong{margin-top:10px;font-size:14.5px;color:var(--muted)}
+.r-outside{border:1.5px solid var(--ink);padding:24px 26px;background:var(--paper2)}
+.r-outside p+p{margin-top:8px}
+@media (max-width:1000px){.layers-4{grid-template-columns:repeat(2,minmax(0,1fr))}.layers-4 li:nth-child(2)::after,.layers-4 li:nth-child(2)::before{display:none}}
+@media (max-width:760px){.layers-4{grid-template-columns:minmax(0,1fr)}.why-list{grid-template-columns:minmax(0,1fr)}.layers-4 li:nth-child(2)::after,.layers-4 li:nth-child(2)::before{display:block}}

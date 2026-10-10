@@ -1,76 +1,66 @@
-// きもちとたいどの距離診断（距離があることを責めない。たいどで楽になれるところを示す）
-// 18問（はい／いいえ）で、きもち（内）・たいど（表面）・作用（あいだ）を0〜6で数え、6つの型に分ける。
-// 文言はこのファイルの上の QUESTIONS・TYPES・GOALS を直せば変わる。回答はどこにも送らず、保存もしない。
+// たいど意識度チェック
+// たいどは技術。16問（はい／いいえ）で、4つの技術（気づく・決める・保つ・届ける）を0〜4で数え、
+// 合計（0〜16）で意識度のレベルを、いちばん低い技術で「次に伸ばす技術」を出す。
+// 文言はこのファイルの上の QUESTIONS・SKILLS・LEVELS を直せば変わる。回答はどこにも送らず、保存もしない。
 (()=>{'use strict';
 const FORM='https://docs.google.com/forms/d/e/1FAIpQLSd0KixjZ9qp4IN2YhDHNsjw01QhMLWU0YslcL0QJP-TNa-7_g/viewform';
 
-// k=きもち t=たいど e=作用。yes が「足す」なら +1、「引く」なら -1
+// a=気づく b=決める c=保つ d=届ける。yes が「足す」なら +1、「引く」なら -1
 const QUESTIONS=[
- ['k',+1,'やりたいことを、ひとことで言える。'],
- ['t',+1,'場面ごとに「ここではこうふるまう」と決めていることがある。'],
- ['e',+1,'自分の話に、相手がのってくる手ごたえがある。'],
- ['k',+1,'仕事で「これだけは大事にしたい」ことがある。'],
- ['t',+1,'初対面で「何をしている人？」と聞かれて、すぐ答えられる。'],
- ['e',-1,'言い方ひとつで、ぎくしゃくすることがある。'],
- ['k',-1,'「ほんとうはどうしたい？」と聞かれると、困る。'],
- ['t',+1,'気分が悪い日も、あいさつや言葉づかいは変えない。'],
- ['e',+1,'会議や打ち合わせで、ほかの人からも意見が出る。'],
- ['k',-1,'人に合わせて、自分の意見を変えることが多い。'],
- ['t',-1,'その場の空気で、ふるまいが大きく変わる。'],
- ['e',+1,'来てほしいお客さんや人が、来ている。'],
- ['k',+1,'最近、自分が何にうれしくなったか、説明できる。'],
- ['t',-1,'苦手な人の前で、どうふるまうかを決めていない。'],
- ['e',-1,'「思っていたのと違った」と言われたことがある。'],
- ['k',+1,'この1か月で、ひとりで考える時間をとった。'],
- ['t',+1,'大事な場面の前に、自分のたいどを考えておくことがある。'],
- ['e',+1,'最近、誰かに「それ、いいね」と言われた。'],
+ ['a',+1,'話しているときの自分の表情を、だいたい想像できる。'],
+ ['b',+1,'場面ごとに「ここではこうふるまう」と決めていることがある。'],
+ ['c',+1,'気分が悪い日も、あいさつや言葉づかいは変えない。'],
+ ['d',+1,'相手によって、話し方や距離感を変えている。'],
+ ['a',-1,'「怖い」「怒ってる？」と言われて、驚いたことがある。'],
+ ['b',-1,'その場の空気で、ふるまいが大きく変わる。'],
+ ['c',-1,'疲れていると、つい口調がきつくなる。'],
+ ['d',+1,'自分の話に、相手がのってくる手ごたえがある。'],
+ ['a',+1,'自分のくせ（口ぐせ・腕組み・ため息など）を3つ言える。'],
+ ['b',+1,'大事な場面の前に、自分のたいどを考えておくことがある。'],
+ ['c',+1,'いやなことがあっても、次の人には切り替えて接することができる。'],
+ ['d',-1,'言い方ひとつで、ぎくしゃくすることがある。'],
+ ['a',+1,'機嫌が悪いとき、それが表に出ているか自分でわかる。'],
+ ['b',-1,'苦手な人の前で、どうふるまうかを決めていない。'],
+ ['c',-1,'一度崩れると、その日は立て直せないことが多い。'],
+ ['d',+1,'会議や打ち合わせで、ほかの人からも意見が出る。'],
 ];
 
-// ゴールとなるソリューション
-const GOALS={
- s0:{name:'きもちが乗らない日も、たいどで運べる',desc:'朝、会議、お客さんの前。気分に左右されない、自分のたいどの型を持てる。',svc:'1on1・コーチング／チームビルディング・研修',icon:'i-heart'},
- s2:{name:'場面ごとのたいどが、決まる',desc:'お客さんの前、職場、はじめての人。場面ごとの「ちょうどいいふるまい」と、言うこと・言わないことが決まる。',svc:'理念・クレドづくり／チームビルディング・研修',icon:'i-person'},
- s3:{name:'ひとことの自己紹介が、決まる',desc:'名刺交換で「それ、どういうこと？」と聞き返される、ひとこと。',svc:'1on1・コーチング／ブランディング',icon:'i-talk'},
- s4:{name:'伝わる場所に、出せる',desc:'ホームページ、求人、SNS、店頭。合うお客さんと合う人が来る出し方。',svc:'採用広報・求人／ブランディング・ホームページ制作／SNS・発信の運用',icon:'i-out'},
- s5:{name:'職場で、乗りあえる',desc:'会議で意見が出る。言い方ひとつでぎくしゃくしない。お互いのたいどを、お互いがつくる。',svc:'社内コミュニティづくり／チームビルディング・研修',icon:'i-swap'},
- s6:{name:'ずれても、戻せる',desc:'相手からどう返ってきたかを月に一度見て、ずれたらたいどを直す。',svc:'SNS・発信の運用／1on1・コーチング（月に一度の見直し）',icon:'i-loop'},
- s1:{name:'きもちの奥が、言葉になる',desc:'乗らない日の奥にある、ほんとうに大事にしたいことを、自分の言葉で言える。',svc:'1on1・コーチング',icon:'i-book'},
+// 4つの技術
+const SKILLS={
+ a:{name:'気づく',en:'NOTICE',icon:'i-q',desc:'自分がいま、どんなたいどをしているかに気づく。',
+    grow:'たいどは、自分ではいちばん見えにくい。まずは「気づく」ところから。人に映してもらうと、早く見えるようになります。',
+    tip:'今日いちど、話している自分の顔をスマホのインカメラで10秒だけ見てみる。思っていた顔と、ちがうかもしれません。',
+    svc:'1on1・コーチング'},
+ b:{name:'決める',en:'DECIDE',icon:'i-check',desc:'場面ごとに、どうふるまうかを先に決めておく。',
+    grow:'たいどは、その場で考えると揺れます。場面ごとに一文だけ先に決めておくと、迷う時間が減って、自分を守れます。',
+    tip:'明日いちばん気が重い場面を1つ選んで、「そこでのたいど」を一文だけ決めておく（例：「会議では、最初に一回うなずく」）。',
+    svc:'理念・クレドづくり／チームビルディング・研修'},
+ c:{name:'保つ',en:'KEEP',icon:'i-loop',desc:'気分が乗らない日も、たいどを崩さない。崩れても戻す。',
+    grow:'きもちが乗らない日こそ、たいどの出番です。崩れたときの「戻し方」を一つ持っておくと、毎日が少し楽になります。',
+    tip:'崩れそうなときの合図（深呼吸を1回、水を一口など）を一つ決めておく。たいどは、戻し方まで含めて技術です。',
+    svc:'1on1・コーチング'},
+ d:{name:'届ける',en:'REACH',icon:'i-swap',desc:'相手に合わせて使い分け、お互いに乗りあえる。',
+    grow:'たいどは、ひとりでは決まりません。相手やチームと一緒に整えると、お互いのたいどが、お互いを乗せていきます。',
+    tip:'次の打ち合わせで、自分が話す前に「どう思う？」と1回だけ聞いてみる。相手のたいどが、少し変わることがあります。',
+    svc:'社内コミュニティづくり／採用広報・SNS'},
 };
 
-// 6つの型。距離があることを責めない。たいどで楽になれるところを言う
-const TYPES={
- maigo:{name:'きもち迷子型',fig:'slump',lead:'きもちが見えないときは、たいどから決めていい。',
-   why:'「きもち」の点が低めでした。まわりに合わせるのが上手なぶん、自分がどうしたいかは後回しになりやすい。でも、きもちが決まるのを待たなくていい。場面ごとのたいどを先に決めておくと、迷う時間が減って、毎日が少し楽になります。きもちは、あとから追いついてくることもあります。',
-   tip:'明日いちばん気が重い場面を1つ選んで、「そこでのたいど」を一文だけ決めておく（例：「会議では、最初に一回うなずく」）。',
-   goals:['s0','s1']},
- muneuchi:{name:'胸の内型',fig:'still',lead:'きもちはあるのに、たいどをまだ決めていない。',
-   why:'「きもち」ははっきりしているのに、「たいど」の点が低めでした。きもちがあるぶん、その日の気分や相手に合わせて、ふるまいが揺れやすいのかもしれません。たいどは技術なので、場面ごとに一文決めておくだけで、毎日が少し楽になることがあります。',
-   tip:'いちばん揺れやすい場面を1つ選んで、「そこでのたいど」を一文だけ決めておく（例：「朝は、自分から先にあいさつする」）。',
-   goals:['s2','s3','s4']},
- omote:{name:'たいど上手型',fig:'back',lead:'きもちと距離があっても、たいどで自分を運べている。',
-   why:'「きもち」の点は低めでも、「たいど」はしっかり出ています。それは悪いことではなく、社会の中で自分を運ぶ技術を、もう持っているということ。ただ、ずっと同じ強さで続けると疲れます。どの場面でたいどを使い、どこで休むかを決めておくと、もっと楽になることがあります。',
-   tip:'1週間のうち「たいどを使う場面」と「たいどを脱いでいい場面」を1つずつ書き出してみる。脱いでいい場所があると、たいどは長持ちしやすくなります。',
-   goals:['s0','s2']},
- ippou:{name:'一方通行型',fig:'lean',lead:'きもちもたいどもあるのに、返ってこない。',
-   why:'「きもち」も「たいど」も出ているのに、「作用」の点が低めでした。届かないのは、出している場所や言い方が、相手に合っていないからかもしれません。相手から見えるたいどを少し変えると、返ってくるものが変わることがあります。',
-   tip:'来てほしいお客さん（人）を1人思い浮かべて、その人がふだん見ている場所を3つ書き出してみる。そこが、出しどころの候補です。',
-   goals:['s4','s6']},
- surechigai:{name:'すれ違い型',fig:'back2',lead:'まわりと、乗りあえていない。',
-   why:'「作用」の点が低めで、とくに職場や身近な人とのやりとりで、ぎくしゃくしやすい答えでした。たいどは、ひとりでは決まりません。お互いのたいどが、お互いをつくっています。チームで場面ごとのたいどを決めておくと、ぶつかる回数が減って、会社にいるのが少し楽になることがあります。',
-   tip:'次の打ち合わせで、自分が話す前に「どう思う？」と1回だけ聞いてみる。相手のたいどが、少し変わることがあります。',
-   goals:['s5','s0']},
- noriai:{name:'乗りあい型',fig:'up',lead:'きもち・たいど・作用が、そろっている。',
-   why:'3つとも高めでした。たいどが相手に届き、返ってきています。この状態は、まわりや時期が変わるとずれていきます。いまのうちに、何がうまくいっているかを言葉にしておくと、ずれても戻せます。',
-   tip:'うまくいっている理由を3つ書いて、チームや身近な人と見せあってみる。乗りあえている理由は、人によって違います。',
-   goals:['s6','s4']},
-};
+// 意識度のレベル（合計 0〜16）
+const LEVELS=[
+ {min:0, name:'レベル1　自動運転',lead:'たいどは、まだ自動で動いています。',
+  body:'たいどを意識しないまま、毎日がすぎている状態です。悪いことではありません。ただ、自分では気づかないところで、損をしたり、疲れたりしているかもしれません。たいどは技術なので、ここからいちばん伸びます。'},
+ {min:6, name:'レベル2　気づきはじめ',lead:'たいどに、気づきはじめています。',
+  body:'ときどき、自分のたいどを意識できています。次は、場面ごとに決めておくこと。決めたたいどは、気分が乗らない日の自分を守ってくれます。'},
+ {min:10,name:'レベル3　使い分け',lead:'場面に合わせて、たいどを使い分けています。',
+  body:'たいどを技術として使えている状態です。チームや相手と一緒に整えると、自分だけでなく、まわりも楽になります。それは、もうマネジメントです。'},
+ {min:13,name:'レベル4　たいど上手',lead:'たいどを、技術として持っています。',
+  body:'自分のたいどに気づき、決め、保ち、届けられています。この技術は、時期や相手が変わると、ずれていきます。いまのうちに言葉にしておくと、まわりにも渡せます。'},
+];
 
 const $=s=>document.querySelector(s);
 const app=$('#diag');if(!app)return;
 let answers=[],i=0;
-
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const icon=(id,cls='ic')=>`<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
 const inline=root=>root.querySelectorAll('svg.ic').forEach(svg=>{const u=svg.querySelector('use');if(!u)return;const sym=document.querySelector(u.getAttribute('href'));if(!sym)return;svg.setAttribute('viewBox',sym.getAttribute('viewBox'));sym.querySelectorAll('path').forEach(p=>{const c=p.cloneNode(true);c.setAttribute('pathLength','1');svg.appendChild(c)});u.remove();requestAnimationFrame(()=>svg.classList.add('drawn'))});
 
 function start(){answers=[];i=0;render()}
@@ -86,43 +76,38 @@ function render(){
   const back=app.querySelector('.q-back');back&&back.addEventListener('click',()=>{i--;render()});
 }
 function score(){
-  const s={k:0,t:0,e:0};
+  const s={a:0,b:0,c:0,d:0};
   QUESTIONS.forEach((q,n)=>{const yes=answers[n]===1;if((q[1]>0&&yes)||(q[1]<0&&!yes))s[q[0]]++});
-  return s; // 各0〜6
-}
-function typeOf(s){
-  const conflict=answers[5]===1&&answers[8]===0; // ぎくしゃくして、会議で意見も出ない（両方そろったときだけ）
-  if(s.k<=2)return s.t>=4?'omote':'maigo';
-  if(s.t<=2)return 'muneuchi';
-  if(s.e<=2)return conflict?'surechigai':'ippou';
-  if(s.e<=3&&conflict)return 'surechigai';
-  return 'noriai';
+  return s; // 各0〜4
 }
 function result(){
-  const s=score(),key=typeOf(s),T=TYPES[key];
-  const bar=(label,en,v)=>`<div class="r-bar"><p><span class="en">${en}</span>${label}</p><div class="r-track"><span style="--w:${v/6*100}%"></span></div><p class="r-num">${v}<small>/6</small></p></div>`;
-  const summary=`【きもちとたいどの距離診断】${T.name}（きもち${s.k}・たいど${s.t}・作用${s.e}／6）`;
+  const s=score(),total=s.a+s.b+s.c+s.d,L=[...LEVELS].reverse().find(l=>total>=l.min);
+  const order=['a','b','c','d'];
+  const low=order.reduce((m,k)=>s[k]<s[m]?k:m,'a'), high=order.reduce((m,k)=>s[k]>s[m]?k:m,'a');
+  const W=SKILLS[low], H=SKILLS[high];
+  const bar=k=>`<div class="r-bar"><p><span class="en">${SKILLS[k].en}</span>${SKILLS[k].name}</p><div class="r-track"><span style="--w:${s[k]/4*100}%"></span></div><p class="r-num">${s[k]}<small>/4</small></p></div>`;
+  const summary=`【たいど意識度チェック】${L.name.replace('　',' ')}（${total}/16）気づく${s.a}・決める${s.b}・保つ${s.c}・届ける${s.d}`;
   const formUrl=FORM+'?usp=pp_url&entry.326506747='+encodeURIComponent(summary+'\n30分の相談を希望します。\n');
-  // 公式LINE：ID があれば結果を入れたトークを開く。無ければ友だち追加の URL
   const lineId=document.body.dataset.lineId||'', lineBase=document.body.dataset.lineUrl||'';
   const lineUrl=lineId?'https://line.me/R/oaMessage/'+encodeURIComponent(lineId)+'/?'+encodeURIComponent(summary+'\n30分の相談を希望します。'):lineBase;
-  const shareText=`きもちとたいどの距離診断で「${T.name}」でした。`;
+  const shareText=`たいど意識度チェックで「${L.name.replace('　',' ')}」でした。`;
   const shareUrl='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
   app.innerHTML=`<div class="r">
-  <p class="r-kicker">あなたは</p>
-  <h2 class="r-name" tabindex="-1">${T.name}</h2>
-  <p class="r-lead">${T.lead}</p>
-  <div class="r-bars">${bar('きもち','FEELING',s.k)}${bar('たいど','TAIDO',s.t)}${bar('作用','EFFECT',s.e)}</div>
-  <p class="r-dist">きもちとたいどの距離：<strong>${Math.abs(s.k-s.t)}</strong>　${s.k-s.t>=2?'きもちが先で、たいどがまだ後ろにいます。':s.t-s.k>=2?'たいどが先に立って、あなたを運んでいます。':'きもちとたいどが、ほぼ重なっています。'}距離があるのは、悪いことではありません。</p>
-  <div class="r-why"><h3>なぜ、この結果？ たいどで、どこが楽になる？</h3><p>${T.why}</p></div>
-  <div class="r-tip"><h3>今日からできる、小さなたいど</h3><p>${T.tip}</p></div>
-  <div class="r-goals"><h3>めざせるゴール</h3><ol>${T.goals.map(g=>`<li>${icon(GOALS[g].icon,'ic ic-l')}<div><p class="g-name">${GOALS[g].name}</p><p>${GOALS[g].desc}</p><p class="g-svc">たいどのしごと：${GOALS[g].svc}</p></div></li>`).join('')}</ol></div>
-  <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたの毎日のたいどの話を聞かせてください。</p>
-  <div class="contact-ways"><a class="way-btn way-line" data-line href="${lineUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>結果をLINEで送る</strong><small>友だち追加して、そのまま相談へ</small></span></a><a class="way-btn" href="${formUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><strong>結果をフォームで送る</strong><small>型と点数が入った状態で開きます</small></span></a></div>
+  <p class="r-kicker">あなたのたいどの意識度は</p>
+  <h2 class="r-name" tabindex="-1">${L.name}</h2>
+  <p class="r-score"><strong>${total}</strong><small>/16</small></p>
+  <p class="r-lead">${L.lead}</p>
+  <div class="r-bars">${order.map(bar).join('')}</div>
+  <div class="r-why"><p>${L.body}</p></div>
+  <div class="r-grow"><h3>次に伸ばす技術：<span>${W.name}</span></h3><p>${W.grow}</p>${s[high]>s[low]?`<p class="r-strong">いちばん育っているのは「${H.name}」。${H.desc}</p>`:''}</div>
+  <div class="r-tip"><h3>今日からできる、小さな練習</h3><p>${W.tip}</p></div>
+  <div class="r-outside"><h3>外の人が入ると、早くなる</h3><p>たいどは、自分ではいちばん見えにくい技術です。スポーツにコーチがいるように、外から映してもらうと、気づくのも、決めるのも早くなります。社内では言いにくいことも、利害のない人になら話せます。</p><p class="g-svc">合いそうなしごと：${W.svc}</p></div>
+  <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたと職場のたいどの話を聞かせてください。</p>
+  <div class="contact-ways"><a class="way-btn way-line" data-line href="${lineUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>結果をLINEで送る</strong><small>友だち追加して、そのまま相談へ</small></span></a><a class="way-btn" href="${formUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><strong>結果をフォームで送る</strong><small>レベルと点数が入った状態で開きます</small></span></a></div>
   <p class="r-more"><a class="more" href="index.html#service">しごとを見る</a></p>
-  <p class="note">LINE・フォームに入るのは診断の結果（型と点数）だけです。回答そのものは、どこにも送っていません。</p></div>
+  <p class="note">LINE・フォームに入るのはチェックの結果（レベルと点数）だけです。回答そのものは、どこにも送っていません。</p></div>
   <div class="r-foot"><a class="share" href="${shareUrl}" target="_blank" rel="noopener noreferrer">結果を X でシェアする ↗</a><button type="button" class="q-back r-again">もう一度やる</button></div>
-  <p class="note">この診断は心理検査ではありません。たいどで楽になれるところに気づくための、きっかけです。</p>
+  <p class="note">このチェックは心理検査ではありません。たいどを技術として見るための、きっかけです。</p>
   </div>`;
   inline(app);
   window.taidoLine&&window.taidoLine(app);
