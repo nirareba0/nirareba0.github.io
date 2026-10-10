@@ -243,3 +243,19 @@ main>section{padding-left:var(--gut);padding-right:calc(var(--gut) + var(--band)
 
 @media (max-width:760px){.brand .logo{height:30px}}
 @media (prefers-reduced-motion:reduce){.logo.nod .daku{animation:none}}
+
+/* たいどの考え方：三つの層（きもち → たいど → 作用） */
+.layers{list-style:none;padding:0;margin:52px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,5vw,72px);counter-reset:none}
+.layers li{position:relative;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.layers li:not(:last-child)::after{content:"";position:absolute;top:28px;right:calc(clamp(28px,5vw,72px) * -.78);width:calc(clamp(28px,5vw,72px) * .56);height:1.5px;background:var(--ink)}
+.layers li:not(:last-child)::before{content:"";position:absolute;top:24px;right:calc(clamp(28px,5vw,72px) * -.78);width:8px;height:8px;border-top:1.5px solid var(--ink);border-right:1.5px solid var(--ink);transform:rotate(45deg)}
+.layer-en{font:400 12px/1 var(--en);letter-spacing:.32em;color:var(--blue);margin-top:8px}
+.layers h3{font-size:24px;letter-spacing:.3em}
+.layers p:not(.layer-en){font-size:14.5px;line-height:1.95;color:var(--muted)}
+.layers-note{margin-top:44px;font-size:clamp(17px,1.8vw,20px);font-weight:500;letter-spacing:.14em;padding-left:22px;position:relative}
+.layers-note::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:12px;border-radius:50%;border:2px solid var(--blue)}
+@media (max-width:760px){
+  .layers{grid-template-columns:minmax(0,1fr);gap:36px}
+  .layers li:not(:last-child)::after{top:auto;bottom:-24px;right:auto;left:27px;width:1.5px;height:14px}
+  .layers li:not(:last-child)::before{top:auto;bottom:-25px;right:auto;left:24px;transform:rotate(135deg)}
+}

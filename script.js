@@ -50,7 +50,7 @@ if(animate){
   });
 
   // 3) 画面に入ったら現れる・描かれる
-  const sel='.entry,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.card-replica,.about-main>*,.faq-list,.contact .actions';
+  const sel='.entry,.layers li,.layers-note,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.card-replica,.about-main>*,.faq-list,.contact .actions';
   const items=[...document.querySelectorAll(sel)];
   items.forEach(el=>el.classList.add('rv'));
   // 同じ親の中で順番に少しずつ遅らせる
