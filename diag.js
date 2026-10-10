@@ -2,6 +2,7 @@
 // たいどは技術。16問（はい／いいえ）で、4つの技術（気づく・決める・保つ・届ける）を0〜4で数え、
 // 合計（0〜16）で意識度のレベルを、いちばん低い技術で「次に伸ばす技術」を出す。
 // 文言はこのファイルの上の QUESTIONS・SKILLS・LEVELS を直せば変わる。回答はどこにも送らず、保存もしない。
+// 数えるのは「始めた」「終えた」の回数だけ（script.js の taidoCount。data-count が空なら何もしない）。
 (()=>{'use strict';
 const FORM='https://docs.google.com/forms/d/e/1FAIpQLSd0KixjZ9qp4IN2YhDHNsjw01QhMLWU0YslcL0QJP-TNa-7_g/viewform';
 
@@ -81,6 +82,7 @@ function score(){
   return s; // 各0〜4
 }
 function result(){
+  window.taidoCount&&window.taidoCount('check-done');
   const s=score(),total=s.a+s.b+s.c+s.d,L=[...LEVELS].reverse().find(l=>total>=l.min);
   const order=['a','b','c','d'];
   const low=order.reduce((m,k)=>s[k]<s[m]?k:m,'a'), high=order.reduce((m,k)=>s[k]>s[m]?k:m,'a');
@@ -116,5 +118,5 @@ function result(){
   requestAnimationFrame(()=>app.querySelector('.r-bars').classList.add('on'));
   app.querySelector('.r-again').addEventListener('click',start);
 }
-document.querySelectorAll('[data-diag-start]').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.diag-intro').hidden=true;app.hidden=false;start();app.scrollIntoView({block:'start'})}));
+document.querySelectorAll('[data-diag-start]').forEach(b=>b.addEventListener('click',()=>{window.taidoCount&&window.taidoCount('check-start');document.querySelector('.diag-intro').hidden=true;app.hidden=false;start();app.scrollIntoView({block:'start'})}));
 })();

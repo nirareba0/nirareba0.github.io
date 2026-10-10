@@ -24,10 +24,19 @@ window.taidoLine=root=>(root||document).querySelectorAll('a[data-line]').forEach
 });
 window.taidoLine(document);
 
-// スマホの画面の下に、距離診断と LINE の固定ボタン（編集モードでは出さない）
+// 数を数える（2026-10-10 本人が B を選んだ）：body の data-count に GoatCounter の URL があるときだけ。
+// cookie を使わず、個人を特定しない。数えるのは、ページの表示・チェックの開始と完了・LINE とフォームのボタンだけ。回答は送らない
+const countUrl=document.body.dataset.count||'',gcq=[];
+window.taidoCount=name=>{if(!countUrl||editing)return;const gc=window.goatcounter;gc&&gc.count?gc.count({path:name,title:name,event:true}):gcq.push(name)};
+if(countUrl&&!editing){const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter=countUrl;s.onload=()=>gcq.splice(0).forEach(window.taidoCount);document.head.appendChild(s)}
+document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const inResult=!!a.closest('#diag');
+  if(a.matches('[data-line]'))window.taidoCount(inResult?'result-line':'line');
+  else if(/docs\.google\.com\/forms/.test(a.href))window.taidoCount(inResult?'result-form':'form')});
+
+// スマホの画面の下に、意識度チェックと LINE の固定ボタン（編集モードでは出さない）
 if(!editing&&!document.body.classList.contains('page-diag')){
   const bar=document.createElement('nav');bar.className='mbar';bar.setAttribute('aria-label','すぐに相談する');
-  bar.innerHTML='<a href="shindan.html">距離診断（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
+  bar.innerHTML='<a href="'+(document.getElementById('check')?'#check':'shindan.html')+'">意識度チェック（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
   document.body.appendChild(bar);window.taidoLine(bar);
 }
 
@@ -53,10 +62,26 @@ const typeHeadline=done=>{
 const logo=document.querySelector('.logo');
 const nod=()=>{if(!logo||!animate)return;logo.classList.remove('nod');void logo.getBoundingClientRect();logo.classList.add('nod')};
 
+// ヒーローの人物：ふてくされて見える → じつは想像 → ほんとうは、背すじをのばして座っている
+const fig=document.querySelector('[data-figure]');
+const figure=wait=>{
+  if(!fig||!animate)return;
+  const replay=fig.querySelector('.fig-replay');
+  fig.querySelectorAll('.fig-upright path:not(.desk)').forEach((p,i)=>p.style.setProperty('--i',i));
+  (fig._t||[]).forEach(clearTimeout);
+  fig.classList.remove('s2','s3');fig.classList.add('play','s1');replay.hidden=true;
+  fig._t=[setTimeout(()=>{fig.classList.remove('s1');fig.classList.add('s2')},wait),
+          setTimeout(()=>{fig.classList.remove('s2');fig.classList.add('s3')},wait+2000),
+          setTimeout(()=>{replay.hidden=false},wait+4600)];
+  if(!replay.dataset.bound){replay.dataset.bound='1';replay.addEventListener('click',()=>figure(1600))}
+};
+
 if(animate){
   // 1) 帯が上から伸び、人物が描き出され、見出しが打たれ、最後に濁点がうなずく
   requestAnimationFrame(()=>root.classList.add('ready'));
   typeHeadline(()=>setTimeout(nod,200));
+  // 人物は、画面に入ってから（スマホでは見出しの下にあるため）
+  if(fig){const t0=performance.now();const fo=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;fo.disconnect();figure(Math.max(1800,3000-(performance.now()-t0)))},{threshold:.5});fo.observe(fig)}
   logo&&logo.closest('a').addEventListener('mouseenter',nod);
 
   // 2) ナビのアイコンは、最初に描いて、触れるたびに描き直す
