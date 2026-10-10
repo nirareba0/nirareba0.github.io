@@ -35,8 +35,8 @@ const SKILLS={
     grow:'たいどは、その場で考えると揺れます。場面ごとに一文だけ先に決めておくと、迷う時間が減って、自分を守れます。',
     tip:'明日いちばん気が重い場面を1つ選んで、「そこでのたいど」を一文だけ決めておく（例：「会議では、最初に一回うなずく」）。',
     svc:'理念・クレドづくり／チームビルディング・研修'},
- c:{name:'保つ',en:'KEEP',icon:'i-loop',desc:'気分が乗らない日も、たいどを崩さない。崩れても戻す。',
-    grow:'きもちが乗らない日こそ、たいどの出番です。崩れたときの「戻し方」を一つ持っておくと、毎日が少し楽になります。',
+ c:{name:'保つ',en:'KEEP',icon:'i-loop',desc:'しんどい日も、たいどを崩さない。崩れても戻す。',
+    grow:'しんどい日こそ、たいどの出番です。崩れたときの「戻し方」を一つ持っておくと、毎日が少し楽になります。',
     tip:'崩れそうなときの合図（深呼吸を1回、水を一口など）を一つ決めておく。たいどは、戻し方まで含めて技術です。',
     svc:'1on1・コーチング'},
  d:{name:'届ける',en:'REACH',icon:'i-swap',desc:'相手に合わせて使い分け、お互いに乗りあえる。',
@@ -104,7 +104,7 @@ function result(){
   <div class="r-outside"><h3>外の人が入ると、早くなる</h3><p>たいどは、自分ではいちばん見えにくい技術です。スポーツにコーチがいるように、外から映してもらうと、気づくのも、決めるのも早くなります。社内では言いにくいことも、利害のない人になら話せます。</p><p class="g-svc">合いそうなしごと：${W.svc}</p></div>
   <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたと職場のたいどの話を聞かせてください。</p>
   <div class="contact-ways"><a class="way-btn way-line" data-line href="${lineUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>結果をLINEで送る</strong><small>友だち追加して、そのまま相談へ</small></span></a><a class="way-btn" href="${formUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><strong>結果をフォームで送る</strong><small>レベルと点数が入った状態で開きます</small></span></a></div>
-  <p class="r-more"><a class="more" href="index.html#service">しごとを見る</a></p>
+  <p class="r-more"><a class="more" href="${document.getElementById('service')?'#service':'index.html#service'}">しごとを見る</a></p>
   <p class="note">LINE・フォームに入るのはチェックの結果（レベルと点数）だけです。回答そのものは、どこにも送っていません。</p></div>
   <div class="r-foot"><a class="share" href="${shareUrl}" target="_blank" rel="noopener noreferrer">結果を X でシェアする ↗</a><button type="button" class="q-back r-again">もう一度やる</button></div>
   <p class="note">このチェックは心理検査ではありません。たいどを技術として見るための、きっかけです。</p>

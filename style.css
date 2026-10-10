@@ -407,3 +407,13 @@ button.cta-btn{font:inherit;font-weight:500;letter-spacing:.16em;font-size:20px;
 .r-outside p+p{margin-top:8px}
 @media (max-width:1000px){.layers-4{grid-template-columns:repeat(2,minmax(0,1fr))}.layers-4 li:nth-child(2)::after,.layers-4 li:nth-child(2)::before{display:none}}
 @media (max-width:760px){.layers-4{grid-template-columns:minmax(0,1fr)}.why-list{grid-template-columns:minmax(0,1fr)}.layers-4 li:nth-child(2)::after,.layers-4 li:nth-child(2)::before{display:block}}
+
+/* ヒーローの問い・トップでその場で答えるチェック */
+.hero-ask{margin-top:34px;font-size:clamp(20px,2.4vw,30px);font-weight:500;line-height:1.7;letter-spacing:.14em;word-break:auto-phrase}
+.cta-down::after{content:" ↓";color:var(--blue)}
+.checkband .diag-app{padding-top:8px}
+.checkband .q-text{margin-top:36px}
+
+/* ヒーローの問いと「代表のかたへ」も、動きのある画面で出す */
+.anim.ready .hero-copy>.hero-ask{opacity:1;transform:none;transition-delay:.5s}
+.anim.ready .hero-copy>.hero-for{opacity:1;transform:none;transition-delay:1.1s}
