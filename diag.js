@@ -91,7 +91,7 @@ function result(){
   const summary=`【たいど意識度チェック】${L.name.replace('　',' ')}（${total}/16）気づく${s.a}・決める${s.b}・保つ${s.c}・届ける${s.d}`;
   const formUrl=FORM+'?usp=pp_url&entry.326506747='+encodeURIComponent(summary+'\n30分の相談を希望します。\n');
   const lineId=document.body.dataset.lineId||'', lineBase=document.body.dataset.lineUrl||'';
-  const lineUrl=lineId?'https://line.me/R/oaMessage/'+encodeURIComponent(lineId)+'/?'+encodeURIComponent(summary+'\n30分の相談を希望します。'):lineBase;
+  const lineUrl=lineId?'https://line.me/R/oaMessage/'+lineId.replace(/[^@w.-]/g,'')+'/?'+encodeURIComponent(summary+'\n30分の相談を希望します。'):lineBase;
   const shareText=`たいど意識度チェックで「${L.name.replace('　',' ')}」でした。`;
   const shareUrl='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
   app.innerHTML=`<div class="r">

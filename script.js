@@ -62,26 +62,10 @@ const typeHeadline=done=>{
 const logo=document.querySelector('.logo');
 const nod=()=>{if(!logo||!animate)return;logo.classList.remove('nod');void logo.getBoundingClientRect();logo.classList.add('nod')};
 
-// ヒーローの人物：ふてくされて見える → じつは想像 → ほんとうは、背すじをのばして座っている
-const fig=document.querySelector('[data-figure]');
-const figure=wait=>{
-  if(!fig||!animate)return;
-  const replay=fig.querySelector('.fig-replay');
-  fig.querySelectorAll('.fig-upright path:not(.desk)').forEach((p,i)=>p.style.setProperty('--i',i));
-  (fig._t||[]).forEach(clearTimeout);
-  fig.classList.remove('s2','s3');fig.classList.add('play','s1');replay.hidden=true;
-  fig._t=[setTimeout(()=>{fig.classList.remove('s1');fig.classList.add('s2')},wait),
-          setTimeout(()=>{fig.classList.remove('s2');fig.classList.add('s3')},wait+2000),
-          setTimeout(()=>{replay.hidden=false},wait+4600)];
-  if(!replay.dataset.bound){replay.dataset.bound='1';replay.addEventListener('click',()=>figure(1600))}
-};
-
 if(animate){
   // 1) 帯が上から伸び、人物が描き出され、見出しが打たれ、最後に濁点がうなずく
   requestAnimationFrame(()=>root.classList.add('ready'));
   typeHeadline(()=>setTimeout(nod,200));
-  // 人物は、画面に入ってから（スマホでは見出しの下にあるため）
-  if(fig){const t0=performance.now();const fo=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;fo.disconnect();figure(Math.max(1800,3000-(performance.now()-t0)))},{threshold:.5});fo.observe(fig)}
   logo&&logo.closest('a').addEventListener('mouseenter',nod);
 
   // 2) ナビのアイコンは、最初に描いて、触れるたびに描き直す
