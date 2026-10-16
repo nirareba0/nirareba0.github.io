@@ -1,18 +1,88 @@
 (()=>{'use strict';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-// Three-step estimate. No personal details, requests or persistent storage.
-const FORM='https://docs.google.com/forms/d/e/1FAIpQLSd0KixjZ9qp4IN2YhDHNsjw01QhMLWU0YslcL0QJP-TNa-7_g/viewform';const kinds={web:'ホームページ作成',creative:'ホームページ作成',audit:'AI導入（予約・シフトなどの業務効率化）',implement:'AI導入（予約・シフトなどの業務効率化）',training:'AI研修・伴走（企業・団体）',talk:'その他・まだわからない'};
-function formUrl(kind,text){const u=new URL(FORM);u.searchParams.set('usp','pp_url');if(kind)u.searchParams.set('entry.281944218',kind);if(text)u.searchParams.set('entry.326506747',text);return u.href}
-const state={step:0,service:null,need:null,support:null};const labels={web:'ホームページづくり',ai:'AI導入・活用',unsure:'何から始めるか相談'};
-const plans={web:{title:'ホームページ制作',price:330000,items:['対話2回・構成と原稿の作成','5ページ程度までの設計・デザイン・実装','スマホ対応・公開・操作説明'],note:'撮影・ドメイン・サーバーなどの実費、追加機能は別途お見積もりします。'},creative:{title:'映像・独自演出を含むサイト制作',price:550000,items:['ホームページ制作の基本内容','映像の企画・生成・編集','スクロールに合わせた独自の演出'],note:'場面数やページ数、機能によって費用が変わります。撮影・ドメイン・サーバーなどの実費は別途です。'},audit:{title:'AI活用の棚卸し',price:33000,fixed:true,items:['2時間の対話で、業務を棚卸し','AIを活用する候補と優先順位の提案','いちばん手軽な1つを、その場で一緒につくって渡す'],note:'画面を共有しながら、つくる様子を見ていただきます。導入・開発・研修の費用は含みません。'},implement:{title:'AI導入・業務改善',price:165000,items:['対象業務1つの設計・設定・実装','ご自身で操作できるまでの説明','導入後30日の質問対応'],note:'AIツールの利用料・API料金は別途です。複数業務や追加開発は別途お見積もりします。'},training:{title:'AI実践研修',price:165000,fixed:true,items:['事前ヒアリング','3時間・5名までの業務に合わせた演習','仕事の中での使い方を整理'],note:'AIツールの利用料、訪問時の交通費は別途です。人数や研修時間の追加はお見積もりします。'},talk:{title:'まずは、相談内容を整理するところから。',price:null,free:true,items:['考えていること、困っていることを聞かせてください','必要な支援と、その範囲を一緒に確認','有料の支援に進む前に、内容と費用をご案内'],note:'この段階では金額を決めず、内容を伺ってからご案内します。'}};
-function supportLabel(v){return {ongoing:'継続サポートを希望',self:'継続：自分で使えるようになりたい',delegate:'継続：改善作業も任せたい',none:'今回の内容のみ'}[v]||'継続は相談後に'}
-function option(value,title,desc=''){return '<button class="option" type="button" data-value="'+value+'"><span><strong>'+title+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</span><span aria-hidden="true">↗</span></button>'}
-function render(focus=true){const body=$('#quiz-body');$('#quiz').hidden=false;$('#quiz-count').textContent=state.step<3?'質問 '+(state.step+1)+' / 3':'相談の入口と費用の目安';$$('.dots i').forEach((x,i)=>x.classList.toggle('active',state.step>=i));$('#quiz-back').hidden=state.step===0;$('#quiz-back').textContent=state.step===3?'← 選び直す':'← ひとつ戻る';$('#quiz-help').textContent=state.step===3?'この診断でお申し込みにはなりません。':'近いものを選んでください。';
-if(state.step===0){body.innerHTML='<h3 tabindex="-1">今、気になっていることは？</h3><div class="quiz-options">'+option('web','ホームページをつくりたい','新しくつくる・今のサイトを見直す')+option('ai','仕事にAIを取り入れたい','業務の整理・導入・使い方を学ぶ')+option('unsure','まだ、うまく言葉にできない','話しながら整理したい')+'</div>';}
-if(state.step===1){let opts;if(state.service==='web')opts=option('web','事業が伝わるサイトをつくる','言葉・構成・デザインから相談')+option('creative','映像や動きにも、こだわりたい','独自の表現までつくり込みたい')+option('talk','まずは必要な内容を相談したい');else if(state.service==='ai')opts=option('audit','どの仕事に使えるか、整理したい','業務の棚卸しと導入方針')+option('implement','具体的な仕事を、使いやすくしたい','1つの業務への導入・仕組みづくり')+option('training','自分やチームで、使い方を学びたい','業務に合わせた実践研修');else opts=option('talk','事業の伝え方を相談したい')+option('audit','仕事の困りごとを整理したい')+option('talk','何を頼めるか聞いてみたい');body.innerHTML='<h3 tabindex="-1">どんなところから始めたいですか？</h3><div class="quiz-options">'+opts+'</div>';}
-if(state.step===2){const website=['web','creative'].includes(state.need)||state.service==='web';body.innerHTML='<h3 tabindex="-1">その後のサポートは？</h3><div class="quiz-options">'+option('none','まずは、今回の内容だけ','継続サポートはつけずに考える')+(website?option('ongoing','公開後の更新も、相談したい','文章・画像の軽微な更新'):option('self','自分でも使えるようになりたい','月2回の対話で、使い方と次の一手を一緒に考える')+option('delegate','改善作業も、続けて任せたい','チーム向け。定例と改善作業まで'))+option('later','話してから決めたい','今は決めなくて大丈夫です')+'</div>';}
-if(state.step===3){const p=plans[state.need],web=['web','creative'].includes(state.need)||state.service==='web',monthly=p.price===null?0:({ongoing:11000,self:22000,delegate:55000}[state.support]||0);const price=p.price===null?'<p class="price-label">最初の相談（30分）</p><p class="free">無料</p><p class="body-copy">内容を伺ってから、お見積もりします。</p>':'<p class="price-label">初期費用の目安（税込）</p><p class="price">'+(p.price/10000).toLocaleString('ja-JP')+'<small>万円'+(p.fixed?'':'〜')+'</small></p>';const m=monthly?'<p class="monthly">継続サポート：<strong>月'+(monthly/10000)+'万円'+(state.support==='self'?'':'〜')+'（税込）</strong><br><small>'+({ongoing:'軽微な文章・画像更新、月2件まで。',self:'月2回・60分の対話＋チャットでの質問。月ごとの契約で、いつでも止められます。次にAIを使う仕事をご自身で選んで組めたら、卒業です。',delegate:'月1回90分の定例＋チャット・改善作業。月5時間相当まで。新規開発は別途。'}[state.support])+'</small></p>':'<p class="monthly">'+(state.support==='none'?'継続サポートは含みません。':'継続サポートの内容・費用は相談後に決定。')+'</p>';const supportText=supportLabel(state.support);const handoff=formUrl(kinds[state.need],'【サイトの診断結果】'+p.title+(p.price===null?'':'（目安 '+(p.price/10000).toLocaleString('ja-JP')+'万円'+(p.fixed?'':'〜')+'）')+'／'+supportText+'\n\n');const contactPill=$('#contact-form');if(contactPill)contactPill.href=handoff;
-body.innerHTML='<div class="result"><p class="result-eyebrow">あなたの相談の入口</p><h3 tabindex="-1">'+p.title+'</h3><p class="selection">'+labels[state.service]+' ／ '+supportLabel(state.support)+'</p>'+price+m+'<ul class="result-list">'+p.items.map(x=>'<li>'+x+'</li>').join('')+'</ul><p class="result-note">'+p.note+'<br>これは概算です。正式な金額・期間・対応範囲は、ご相談後のお見積もりで確定します。</p><a class="pill" href="'+handoff+'" target="_blank" rel="noopener noreferrer">この内容で、フォームから話してみる <span aria-hidden="true">↗</span></a><p class="result-handoff">選んだ内容がフォームの下書きに入ります。送るまで届きません。<br>外部サービスが新しいタブで開きます。</p><button type="button" class="plain-button" id="restart">最初からやり直す</button></div>';$('#restart').addEventListener('click',()=>{Object.assign(state,{step:0,service:null,need:null,support:null});render()});}
-body.querySelectorAll('[data-value]').forEach(b=>b.addEventListener('click',()=>{const value=b.dataset.value;if(state.step===0){state.service=value;state.need=null;state.support=null}else if(state.step===1){state.need=value;state.support=null}else state.support=value;state.step++;render()}));if(focus){body.querySelector('h3').focus({preventScroll:true});if($('#quiz').getBoundingClientRect().top<0)$('#quiz').scrollIntoView({behavior:'instant',block:'start'})}}
-$('#quiz-back').addEventListener('click',()=>{if(state.step>0)state.step--;render()});$$('[data-start]').forEach(a=>a.addEventListener('click',()=>{Object.assign(state,{step:1,service:a.dataset.start,need:null,support:null});render(false)}));render(false);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const editing=/[?&#]edit\b/.test(location.search+location.hash);
+const animate=!reduce&&!editing;
+const root=document.documentElement;
+if(animate)root.classList.add('anim');
+
+// 線のアイコンを <use> から中身に置き換える（線を1本ずつ描くため）
+document.querySelectorAll('svg.ic').forEach(svg=>{
+  const use=svg.querySelector('use');if(!use)return;
+  const sym=document.querySelector(use.getAttribute('href'));if(!sym)return;
+  svg.setAttribute('viewBox',sym.getAttribute('viewBox'));
+  sym.querySelectorAll('path').forEach(p=>{const c=p.cloneNode(true);c.setAttribute('pathLength','1');svg.appendChild(c)});
+  use.remove();
+});
+
+// 公式LINE：body の data-line-url（友だち追加 URL）を使う。REPLACE-ME のあいだは準備中
+const lineUrl=document.body.dataset.lineUrl||'';
+const linePending=!lineUrl||/REPLACE-ME/.test(lineUrl);
+const toast=msg=>{let t=document.querySelector('.toast');if(!t){t=document.createElement('p');t.className='toast';t.setAttribute('role','status');document.body.appendChild(t)}t.textContent=msg;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2600)};
+window.taidoLine=root=>(root||document).querySelectorAll('a[data-line]').forEach(a=>{
+  if(!a.getAttribute('href')||/REPLACE-ME/.test(a.getAttribute('href')))a.href=lineUrl||'#';
+  if(linePending&&!a.dataset.bound){a.dataset.bound='1';a.addEventListener('click',e=>{if(editing)return;e.preventDefault();toast('公式LINEは準備中です。いまはフォームからどうぞ。')})}
+});
+window.taidoLine(document);
+
+// 数を数える（2026-10-10 本人が B を選んだ）：body の data-count に GoatCounter の URL があるときだけ。
+// cookie を使わず、個人を特定しない。数えるのは、ページの表示・チェックの開始と完了・LINE とフォームのボタンだけ。回答は送らない
+const countUrl=document.body.dataset.count||'',gcq=[];
+window.taidoCount=name=>{if(!countUrl||editing)return;const gc=window.goatcounter;gc&&gc.count?gc.count({path:name,title:name,event:true}):gcq.push(name)};
+if(countUrl&&!editing){const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter=countUrl;s.onload=()=>gcq.splice(0).forEach(window.taidoCount);document.head.appendChild(s)}
+document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const inResult=!!a.closest('#diag');
+  if(a.matches('[data-line]'))window.taidoCount(inResult?'result-line':'line');
+  else if(/docs\.google\.com\/forms/.test(a.href))window.taidoCount(inResult?'result-form':'form')});
+
+// スマホの画面の下に、意識度チェックと LINE の固定ボタン（編集モードでは出さない）
+if(!editing&&!document.body.classList.contains('page-diag')){
+  const bar=document.createElement('nav');bar.className='mbar';bar.setAttribute('aria-label','すぐに相談する');
+  bar.innerHTML='<a href="'+(document.getElementById('check')?'#check':'shindan.html')+'">意識度チェック（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
+  document.body.appendChild(bar);window.taidoLine(bar);
+}
+
+// アイコンを描く：黒い線 → 青い線の順
+const draw=svg=>{svg.classList.remove('drawn');void svg.getBoundingClientRect();svg.classList.add('drawn')};
+
+// 見出しが打ち込まれる（iroawase の型）
+const typeHeadline=done=>{
+  const h=document.querySelector('[data-type]');
+  if(!h||!animate){done&&done();return}
+  h.setAttribute('aria-label',h.textContent.replace(/\s+/g,''));
+  const chars=[];
+  const wrap=node=>{[...node.childNodes].forEach(n=>{
+    if(n.nodeType===3){const f=document.createDocumentFragment();[...n.textContent].forEach(c=>{const s=document.createElement('span');s.className='ch';s.textContent=c;s.setAttribute('aria-hidden','true');f.appendChild(s);chars.push(s)});n.replaceWith(f)}
+    else if(n.nodeType===1)wrap(n)})};
+  wrap(h);h.classList.add('typing');
+  const caret=document.createElement('span');caret.className='caret';caret.setAttribute('aria-hidden','true');
+  let i=0;const tick=()=>{if(i<chars.length){chars[i].classList.add('on');chars[i].after(caret);i++;setTimeout(tick,chars[i-1].textContent==='、'?420:140)}else{done&&done()}};
+  setTimeout(tick,700);
+};
+
+// ロゴの濁点がうなずく
+const logo=document.querySelector('.logo');
+const nod=()=>{if(!logo||!animate)return;logo.classList.remove('nod');void logo.getBoundingClientRect();logo.classList.add('nod')};
+
+if(animate){
+  // 1) 帯が上から伸び、人物が描き出され、見出しが打たれ、最後に濁点がうなずく
+  requestAnimationFrame(()=>root.classList.add('ready'));
+  typeHeadline(()=>setTimeout(nod,200));
+  logo&&logo.closest('a').addEventListener('mouseenter',nod);
+
+  // 2) ナビのアイコンは、最初に描いて、触れるたびに描き直す
+  document.querySelectorAll('.site-header nav svg.ic').forEach((svg,i)=>{
+    setTimeout(()=>draw(svg),300+i*90);
+    svg.closest('a').addEventListener('mouseenter',()=>draw(svg));
+    svg.closest('a').addEventListener('focus',()=>draw(svg));
+  });
+
+  // 3) 画面に入ったら現れる・描かれる
+  const sel='.contact-ways,.start-steps li,.case-list li,.why-list li,.svc-list li,.svc-group-h,.entry,.layers li,.layers-note,.goal-list li,.diag-types,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.local-grid,.card-replica,.about-main>*,.faq-list,.contact .actions';
+  const items=[...document.querySelectorAll(sel)];
+  items.forEach(el=>el.classList.add('rv'));
+  // 同じ親の中で順番に少しずつ遅らせる
+  const groups=new Map();items.forEach(el=>{const k=el.parentElement;groups.set(k,(groups.get(k)||0)+1);el.style.setProperty('--d',(groups.get(k)-1)*90+'ms')});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');el.querySelectorAll('svg.ic').forEach(s=>setTimeout(()=>draw(s),parseInt(el.style.getPropertyValue('--d'))||0));io.unobserve(el)}),{rootMargin:'0px 0px -12% 0px',threshold:.12});
+  items.forEach(el=>io.observe(el));
+  document.querySelectorAll('.entry').forEach(a=>a.addEventListener('mouseenter',()=>a.querySelectorAll('svg.ic').forEach(draw)));
+}
 })();
