@@ -1,0 +1,148 @@
+/* 公式LINE の仕組みづくり（line/ と3枚の LP）。土台は ../style.css。ページは scratchpad の build.py で書き出した */
+
+/* 現在地 */
+.crumbs{max-width:calc(var(--max) + var(--gut)*2 + var(--band));margin:0 auto;padding:6px calc(var(--gut) + var(--band)) 0 var(--gut)}
+.crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 0;font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+.crumbs li+li::before{content:"／";margin:0 .6em;color:var(--rule)}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{color:var(--blue)}
+.site-header nav a[aria-current="page"] span{color:var(--blue)}
+.site-header nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--blue)}
+
+/* ヒーロー */
+.lp-hero{min-height:auto;padding-top:clamp(32px,5vw,64px);padding-bottom:clamp(32px,5vw,72px)}
+.lp-hero h1{font-size:clamp(28px,4.4vw,54px);letter-spacing:.12em;line-height:1.6;min-height:0}
+.lp-hero .kicker{font-size:13px;letter-spacing:.2em;line-height:1.8}
+.lp-hero .hero-lead{max-width:30em;color:var(--ink)}
+.lp-fig{display:flex;justify-content:center}
+.lp-fig .ph-hero{width:100%;max-width:420px}
+.lp-fig .ph-hero1{width:62%;max-width:250px}
+
+/* 線の図（スマホの画面） */
+.ph{display:block;width:100%;height:auto;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ph .ph-f{fill:var(--paper2)}
+.ph .fp{fill:var(--paper)}
+.ph .bl{stroke:var(--blue)}
+.ph .mu{stroke:#b4ab9c}
+.ph .fb{fill:var(--blue);stroke:var(--blue)}
+.ph .dsh{stroke-dasharray:3 4}
+
+/* どう動くか */
+.dg-wrap{margin:44px 0 0;padding:clamp(16px,3vw,32px);background:var(--paper2);border:1px solid var(--rule)}
+.dg{display:block;width:100%;height:auto;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dg text{fill:var(--ink);stroke:none;font-family:var(--jp);letter-spacing:.06em}
+.dg .t-b{fill:var(--blue)}
+.dg .t-m{fill:var(--muted)}
+.dg .fp{fill:var(--paper)}
+.dg .bl{stroke:var(--blue)}
+.dg .mu{stroke:#b4ab9c}
+.dg .fb{fill:var(--blue);stroke:var(--blue)}
+.dg-tall{display:none;max-width:400px;margin:0 auto}
+@media (max-width:760px){.dg-wide{display:none}.dg-tall{display:block}}
+.dots{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:12px;max-width:52em}
+.dots li{position:relative;padding-left:24px;font-size:15px;line-height:1.95}
+.dots li::before{content:"";position:absolute;left:0;top:.95em;width:12px;height:2px;background:var(--blue)}
+
+/* こう変わる・何を作るか */
+.change-list{list-style:none;padding:0;margin:44px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 48px}
+.change-list li{border-top:1.5px solid var(--ink);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+.change-list h3{font-size:19px;letter-spacing:.1em;line-height:1.6}
+.change-list h3::before{content:"";display:block;width:28px;height:4px;background:var(--blue);margin-bottom:14px}
+.change-list p{font-size:15px;line-height:1.95;color:var(--muted);word-break:auto-phrase;overflow-wrap:anywhere}
+#what .change-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* 画面の流れ */
+.flow{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px}
+.flow li{position:relative;display:flex;flex-direction:column;gap:16px}
+.flow-fig{padding:0 8%}
+.flow li:not(:last-child)::after{content:"";position:absolute;top:30%;right:-22px;width:16px;height:16px;border-top:1.5px solid var(--blue);border-right:1.5px solid var(--blue);transform:rotate(45deg)}
+.flow-no{font:500 22px/1 var(--en);color:var(--blue);letter-spacing:.08em}
+.flow h3{font-size:16.5px;letter-spacing:.08em;line-height:1.6;margin-top:8px}
+.flow-txt p:not(.flow-no){font-size:14px;line-height:1.9;color:var(--muted);margin-top:6px}
+
+/* 進め方 */
+.proc{list-style:none;padding:0;margin:44px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.proc li{border-top:1.5px solid var(--ink);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.proc-no{font:500 24px/1 var(--en);color:var(--blue)}
+.proc h3{font-size:17px;letter-spacing:.08em;line-height:1.6}
+.proc-tag{display:inline-block;margin-left:8px;font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--blue);border:1px solid var(--blue);border-radius:999px;padding:0 10px;vertical-align:2px;white-space:nowrap}
+.proc li>p:not(.proc-no){font-size:14px;line-height:1.9;color:var(--muted)}
+
+/* 値段 */
+.price-box{margin-top:44px;display:grid;grid-template-columns:1.3fr 1fr;border:1.5px solid var(--ink);background:var(--paper2);max-width:880px}
+.pb{padding:26px 28px}
+.pb-sub{border-left:1px solid var(--rule)}
+.pb-k{font-size:14px;letter-spacing:.14em;color:var(--muted)}
+.pb-num{margin-top:10px;font-size:18px;font-weight:500;letter-spacing:.06em}
+.pb-num .n{font:500 clamp(36px,4.4vw,52px)/1 var(--en);letter-spacing:.02em;margin-right:4px;color:var(--ink)}
+.pb-num.s .n{font-size:clamp(28px,3vw,36px)}
+.pb-num small{font-size:13px;color:var(--muted);margin-left:6px;font-weight:400}
+.pb-main .n{box-shadow:inset 0 -6px 0 rgba(1,90,210,.18)}
+.pb-t{margin-top:8px;font-size:14px;color:var(--muted)}
+.incl-h{margin-top:40px;font-size:17px;letter-spacing:.12em}
+.incl{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 32px;max-width:880px}
+.incl li{position:relative;padding-left:26px;font-size:15px;line-height:1.8}
+.incl li::before{content:"";position:absolute;left:2px;top:.45em;width:12px;height:7px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+
+/* 3つの LP への入口 */
+.lp-cards{list-style:none;padding:0;margin:44px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.lp-card{height:100%;display:flex;flex-direction:column;gap:12px;padding:28px 26px 24px;border:1.5px solid var(--ink);background:var(--paper2);text-decoration:none;transition:transform .2s,box-shadow .2s}
+.lp-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px -18px rgba(0,0,0,.45)}
+.lp-card h3{font-size:21px;letter-spacing:.12em}
+.lp-pain{font-size:16px;font-weight:500;line-height:1.8;letter-spacing:.06em;word-break:auto-phrase;overflow-wrap:anywhere}
+.lp-who{font-size:13px;color:var(--muted);letter-spacing:.06em}
+.lp-price{margin-top:auto;padding-top:14px;border-top:1px solid var(--rule);font-size:15px;font-weight:500}
+.lp-price .n{font:500 30px/1 var(--en);margin-right:2px}
+.lp-price small{font-size:12px;color:var(--muted);margin-left:6px;font-weight:400}
+.lp-go{font-size:14px;font-weight:500;letter-spacing:.14em;color:var(--blue)}
+.lp-go::after{content:" →"}
+
+/* 作り方で決めていること */
+.promise-list{list-style:none;padding:0;margin:44px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 56px}
+.promise-list li{border-top:1.5px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:12px}
+.promise-list h3{font-size:20px;letter-spacing:.12em}
+.promise-list p{font-size:15px;line-height:1.95;color:var(--muted);word-break:auto-phrase;overflow-wrap:anywhere}
+
+/* 作例（なんでポスト） */
+.work-np{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,64px);align-items:start;margin-top:40px;border-top:1.5px solid var(--ink);padding-top:36px}
+.np-logo{display:block;background:var(--paper2);border:1px solid var(--rule);padding:clamp(18px,3vw,32px)}
+.np-logo img{width:100%;height:auto}
+.np-lead{font-size:clamp(16px,1.7vw,19px);font-weight:500;letter-spacing:.08em;line-height:1.9}
+.np-body .dots{margin-top:20px}
+.np-body .actions{margin-top:24px}
+
+/* 既製品を先に */
+.honest{padding-top:clamp(56px,7vw,88px)}
+.honest-in{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;border:1.5px solid var(--blue);background:var(--paper2);padding:28px;max-width:880px}
+.sec h2.honest-h{font-size:clamp(19px,2vw,23px);letter-spacing:.12em;margin-bottom:8px}
+.honest-in p{font-size:15px;line-height:1.95}
+
+/* 相談はLINE だけ */
+.contact-ways.one{grid-template-columns:minmax(0,1fr);max-width:480px}
+.mbar.one{grid-template-columns:1fr}
+.mbar.one a{background:var(--ink);color:var(--paper)}
+
+/* 幅ごと */
+@media (max-width:1100px){
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px}
+  .flow li:nth-child(3)::after{display:none}
+  .proc{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .lp-cards{grid-template-columns:minmax(0,1fr)}
+  #what .change-list{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .lp-fig .ph-hero{max-width:300px}
+  .lp-fig .ph-hero1{width:46%;max-width:170px}
+  .change-list,.promise-list,.incl,.work-np{grid-template-columns:minmax(0,1fr)}
+  .flow{grid-template-columns:minmax(0,1fr);gap:0}
+  .flow li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:18px;align-items:start;padding:18px 0;border-top:1px solid var(--rule)}
+  .flow-fig{padding:0}
+  .flow li:not(:last-child)::after{display:none}
+  .proc{grid-template-columns:minmax(0,1fr)}
+  .price-box{grid-template-columns:minmax(0,1fr)}
+  .pb-sub{border-left:0;border-top:1px solid var(--rule)}
+  .honest-in{grid-template-columns:minmax(0,1fr);padding:22px}
+  .crumbs ol{font-size:12px}
+}

@@ -36,7 +36,9 @@ document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return
 // スマホの画面の下に、意識度チェックと LINE の固定ボタン（編集モードでは出さない）
 if(!editing&&!document.body.classList.contains('page-diag')){
   const bar=document.createElement('nav');bar.className='mbar';bar.setAttribute('aria-label','すぐに相談する');
-  bar.innerHTML='<a href="'+(document.getElementById('check')?'#check':'shindan.html')+'">意識度チェック（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
+  // 公式LINE の仕組みづくりのページ（body.page-line）は、LINE の相談だけを出す
+  if(document.body.classList.contains('page-line')){bar.classList.add('one');bar.innerHTML='<a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談する（はじめの30分は無料）</a>'}
+  else bar.innerHTML='<a href="'+(document.getElementById('check')?'#check':'shindan.html')+'">意識度チェック（3分）</a><a data-line href="'+(lineUrl||'#')+'" target="_blank" rel="noopener noreferrer">LINEで相談</a>';
   document.body.appendChild(bar);window.taidoLine(bar);
 }
 
@@ -76,7 +78,7 @@ if(animate){
   });
 
   // 3) 画面に入ったら現れる・描かれる
-  const sel='.contact-ways,.start-steps li,.case-list li,.why-list li,.svc-list li,.svc-group-h,.entry,.layers li,.layers-note,.goal-list li,.diag-types,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.local-grid,.card-replica,.about-main>*,.faq-list,.contact .actions';
+  const sel='.change-list li,.flow li,.proc li,.lp-cards li,.promise-list li,.price-box,.incl,.dg-wrap,.dots,.work-np,.honest-in,.svc-product,.contact-ways,.start-steps li,.case-list li,.why-list li,.svc-list li,.svc-group-h,.entry,.layers li,.layers-note,.goal-list li,.diag-types,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.local-grid,.card-replica,.about-main>*,.faq-list,.contact .actions';
   const items=[...document.querySelectorAll(sel)];
   items.forEach(el=>el.classList.add('rv'));
   // 同じ親の中で順番に少しずつ遅らせる

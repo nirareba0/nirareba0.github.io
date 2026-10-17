@@ -427,3 +427,13 @@ button.cta-btn{font:inherit;font-weight:500;letter-spacing:.16em;font-size:20px;
 /* ヒーローの問いと「代表のかたへ」も、動きのある画面で出す */
 .anim.ready .hero-copy>.hero-ask{opacity:1;transform:none;transition-delay:.5s}
 .anim.ready .hero-copy>.hero-for{opacity:1;transform:none;transition-delay:1.1s}
+
+/* しごと：プロダクト（公式LINE の仕組みづくり）。7つのサービスとは別の柱 */
+.svc-product{margin-top:56px}
+.product-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:start;margin-top:12px;padding:28px;border:1.5px solid var(--ink);background:var(--paper2);text-decoration:none;max-width:880px;transition:transform .2s,box-shadow .2s}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px -18px rgba(0,0,0,.45)}
+.product-card h3{font-size:20px;letter-spacing:.12em}
+.product-card p{margin-top:8px;font-size:14.5px;line-height:1.95;color:var(--muted)}
+.product-card .product-go{font-weight:500;letter-spacing:.14em;color:var(--blue)}
+.product-go::after{content:" →"}
+@media (max-width:760px){.product-card{grid-template-columns:minmax(0,1fr);padding:22px}}
