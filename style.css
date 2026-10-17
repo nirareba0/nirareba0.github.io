@@ -437,3 +437,18 @@ button.cta-btn{font:inherit;font-weight:500;letter-spacing:.16em;font-size:20px;
 .product-card .product-go{font-weight:500;letter-spacing:.14em;color:var(--blue)}
 .product-go::after{content:" →"}
 @media (max-width:760px){.product-card{grid-template-columns:minmax(0,1fr);padding:22px}}
+
+/* プロダクトの節（2026-10-17・トップの組み替え） */
+.prod{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:40px}
+.prod-fig{display:block}
+.prod-fig img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
+.prod-list{list-style:none;padding:0;margin:0;border-top:1.5px solid var(--ink)}
+.prod-list a{display:block;padding:18px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.prod-list h3{font-size:18px;letter-spacing:.1em}
+.prod-list h3::after{content:" →";color:var(--blue)}
+.prod-list a:hover h3{color:var(--blue)}
+.prod-list p{font-size:14.5px;line-height:1.85;color:var(--muted);margin-top:4px}
+.prod-go{margin-top:28px}
+.more-in::after{content:" →"}
+.cases-sec .cases{margin-top:8px}
+@media (max-width:760px){.prod{grid-template-columns:minmax(0,1fr)}}
