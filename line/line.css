@@ -279,3 +279,106 @@
 @media (max-width:900px){
   .demo-scr .mk-msgs,.lp-fig .mk-msgs{min-height:0}
 }
+
+/* ===== v3（2026-10-17）: 一般のかた向けに書き直し。写真と映像（AI で生成）を入れた ===== */
+.v3 .anim.ready .hero-copy>*,.anim.ready .v3-hero .hero-copy>*{opacity:1;transform:none}
+.v3-hero{min-height:auto;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);padding-top:clamp(28px,4vw,56px);padding-bottom:clamp(40px,5vw,72px)}
+.v3-hero h1{font-size:clamp(28px,3.9vw,48px);letter-spacing:.1em;line-height:1.55;min-height:0}
+.v3-hero .kicker{font-size:13px;letter-spacing:.18em;line-height:1.8;color:var(--muted)}
+.v3-hero .kicker a{text-decoration:none}
+.v3-hero .hero-lead{max-width:30em;color:var(--ink);margin-top:22px}
+.v3-hero .actions{margin-top:30px;align-items:center}
+.hero-pline{margin-top:18px;font-size:15px;letter-spacing:.08em}
+.hero-pline .n,.scard-p .n,.pbox-n .n{font:500 1.35em/1 var(--en);letter-spacing:.02em}
+.cta-line{display:inline-flex;align-items:center;gap:.5em;padding:16px 28px;border-radius:999px;background:var(--blue);color:#fff;font-size:16px;letter-spacing:.12em;box-shadow:0 10px 24px -14px rgba(1,90,210,.8);transition:transform .15s,box-shadow .15s}
+.cta-line::before{display:none}
+.cta-line::after{content:" ↗";color:#fff}
+.cta-line:hover{transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(1,90,210,.9)}
+.hv,.hp{position:relative;margin:0;border-radius:18px;overflow:hidden;background:var(--paper2);aspect-ratio:16/10}
+.hv video,.hp>img{width:100%;height:100%;object-fit:cover;display:block}
+.hv-btn{position:absolute;right:12px;bottom:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(20,20,20,.55);color:#fff;display:grid;place-items:center;cursor:pointer}
+.hv-btn .ic{width:20px;height:20px}
+.hv-btn[data-s="pause"] .u-play,.hv-btn[data-s="play"] .u-pause{display:none}
+.hp{overflow:visible;aspect-ratio:auto}
+.hp>img{border-radius:18px;aspect-ratio:16/10}
+.hp-mock{position:absolute;right:-8px;bottom:-36px;width:min(46%,230px);filter:drop-shadow(0 20px 30px rgba(0,0,0,.28))}
+.hp-mock .mk{min-height:0;max-width:none;font-size:11px;padding:6px 8px 10px;border-radius:24px}
+.hp-mock .mk-body{gap:6px;padding:8px 2px}
+.hp-mock .mk-card:nth-child(n+3){display:none}
+
+/* 困りごと（写真3枚） */
+.pcards{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,36px)}
+.pcards img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px}
+.pcards p{margin-top:16px;font-size:15.5px;line-height:1.9;word-break:auto-phrase;overflow-wrap:anywhere}
+
+/* できること（写真つきカード） */
+.scards{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,32px)}
+.scard{display:flex;flex-direction:column;height:100%;background:var(--paper2);border:1px solid var(--rule);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 18px 36px -24px rgba(0,0,0,.45)}
+.scard img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.scard-b{display:flex;flex-direction:column;gap:10px;padding:22px 22px 24px;flex:1}
+.scard h3{font-size:19px;letter-spacing:.08em;line-height:1.6}
+.scard-b>p{font-size:14.5px;line-height:1.9;color:var(--muted)}
+.scard-b>p.scard-who{font-size:13px;color:var(--blue);letter-spacing:.08em}
+.scard-b>p.scard-p{margin-top:auto;color:var(--ink);font-size:15px}
+.scard-p small{display:block;font-size:12px;color:var(--muted);letter-spacing:.06em}
+.scard-b>p.scard-go{color:var(--ink);font-weight:500;letter-spacing:.14em;font-size:14px}
+.scard-go::after{content:" →";color:var(--blue)}
+
+/* 写真と文の2段 */
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center;margin-top:40px}
+.split-r .split-fig{order:2}
+.split-fig{margin:0}
+.split-fig img{width:100%;border-radius:18px;aspect-ratio:16/10;object-fit:cover}
+.steps3{list-style:none;padding:0;margin:0;display:grid;gap:26px}
+.steps3 li{border-top:1.5px solid var(--ink);padding-top:16px}
+.steps3 h3,.pains2 h3{font-size:18px;letter-spacing:.1em;margin-top:6px}
+.steps3 p:not(.flow-no){font-size:15px;line-height:1.9;color:var(--muted);margin-top:4px}
+.pains2{display:grid;gap:26px}
+.pains2 div{border-top:1.5px solid var(--ink);padding-top:14px}
+.pains2 ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.pains2 li{position:relative;padding-left:22px;font-size:15px;line-height:1.85}
+.pains2 li::before{content:"";position:absolute;left:0;top:.9em;width:12px;height:2px;background:var(--blue)}
+
+/* 変わること・約束 */
+.feat{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 48px}
+.feat3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.feat li{border-top:1.5px solid var(--ink);padding-top:18px}
+.feat h3{font-size:18.5px;letter-spacing:.1em;line-height:1.6}
+.feat h3::before{content:"";display:block;width:28px;height:4px;background:var(--blue);margin-bottom:12px}
+.feat p{margin-top:8px;font-size:15px;line-height:1.9;color:var(--muted);word-break:auto-phrase;overflow-wrap:anywhere}
+.proc4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* 値段 */
+.pbox{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin-top:36px;max-width:880px;border:1.5px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--paper2)}
+.pbox>div{padding:24px 26px}
+.pbox>div+div{border-left:1px solid var(--rule)}
+.pbox-k{font-size:13px;letter-spacing:.16em;color:var(--muted)}
+.pbox-n{font-size:20px;margin-top:6px}
+.pbox-s{font-size:13.5px;line-height:1.85;color:var(--muted);margin-top:8px}
+
+@media (max-width:1100px){.proc4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+  .v3-hero{grid-template-columns:minmax(0,1fr)}
+  .v3-hero .hero-figure{order:-1}
+  .scards,.pcards{grid-template-columns:minmax(0,1fr)}
+  .pcards li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center}
+  .pcards p{margin-top:0;font-size:15px}
+  .split{grid-template-columns:minmax(0,1fr)}
+  .split-r .split-fig{order:0}
+  .feat3{grid-template-columns:minmax(0,1fr)}
+  .hp{margin-bottom:28px}
+}
+@media (max-width:760px){
+  .feat,.proc4,.pbox{grid-template-columns:minmax(0,1fr)}
+  .pbox>div+div{border-left:0;border-top:1px solid var(--rule)}
+  .hp-mock{right:8px;bottom:-28px;width:42%}
+  .cta-line{font-size:15px;padding:14px 22px}
+}
+.hero-when{margin-top:10px;font-size:13px;line-height:1.8;color:var(--muted)}
+.split-mk{display:flex;justify-content:center}
+.split-mk .mk{max-width:280px;min-height:0}
+#shop h2{max-width:none}
+.v3-hero .hero-figure img,.v3-hero .hero-figure video{max-width:none;margin:0}
+.hp-mock.l{right:auto;left:-8px}
+@media (max-width:760px){.hp-mock.l{left:8px}}
