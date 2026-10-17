@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>予約の LINE｜LINE で予約を受けて、前の日に知らせる｜たいど</title>
-<meta name="description" content="電話と DM でばらばらに来る予約を、LINE の中のページにまとめ、決まった予約は前の日に LINE で知らせます。仮予約のあとにお店が承認する、受け方に決まりがある予約に。165,000円〜（税込）・保守 月11,000円〜。山梨県韮崎市・全国オンライン。">
+<title>承認制予約の仕組みづくり｜LINE公式アカウントを活用｜たいど</title>
+<meta name="description" content="LINE の中のページで仮予約を受け、お店が確かめてから確定する予約の仕組みを作ります。確定した予約には前の日に知らせを送り、送る数は月の上限で止める設計。はじめに作る 165,000円〜／保守（任意）月11,000円〜（税込）。山梨県韮崎市・全国オンライン。">
 <meta name="theme-color" content="#fcf7ef">
-<meta property="og:title" content="予約の LINE｜たいど">
-<meta property="og:description" content="予約を LINE で受けて、前の日に知らせる。165,000円〜（税込）。">
+<meta property="og:title" content="承認制予約の仕組みづくり｜たいど">
+<meta property="og:description" content="仮予約を受けて、お店が確かめてから確定する。LINE公式アカウントを活用。165,000円〜（税込）。">
 <meta property="og:type" content="website"><meta property="og:url" content="https://nirareba0.github.io/line/yoyaku/"><meta property="og:site_name" content="たいど"><meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://nirareba0.github.io/assets/og-line.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="たいど 公式LINE の仕組みづくり。自前の記録と、LINE の中で開くページまで。線で描いたスマホとデータベースの図">
+<meta property="og:image" content="https://nirareba0.github.io/assets/og-line.jpg?v=2"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="たいど LINE公式アカウントを活用した仕組みづくり。会員記録・承認制予約・地域団体の連絡">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://nirareba0.github.io/line/yoyaku/">
 <link rel="icon" href="../../assets/favicon-card.svg" type="image/svg+xml">
 <link rel="preload" href="../../assets/fonts/zenkaku-500.woff2" as="font" type="font/woff2" crossorigin>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!/[?&#]edit\b/.test(location.search+location.hash)){document.documentElement.classList.add("anim");setTimeout(function(){if(!document.documentElement.classList.contains("ready"))document.documentElement.classList.remove("anim")},3000)}</script>
 <link rel="stylesheet" href="../../style.css?v=h1">
-<link rel="stylesheet" href="../../line/line.css?v=1">
+<link rel="stylesheet" href="../../line/line.css?v=2">
 <script src="../../script.js?v=h1" defer></script>
 </head>
 <body class="page-line" data-line-url="https://line.me/R/ti/p/@914vzoom" data-line-id="@914vzoom" data-count="">
 <svg class="sprite" aria-hidden="true" focusable="false"><defs>
-<symbol id="i-line" viewBox="0 0 32 32"><path d="M16 5.5c-6.6 0-12 4.3-12 9.6 0 3.1 1.8 5.8 4.7 7.6L8 27l4.4-2.6c1.1.3 2.4.4 3.6.4 6.6 0 12-4.3 12-9.6S22.6 5.5 16 5.5z"/><path class="b" d="M11 15.2v.1M16 15.2v.1M21 15.2v.1"/></symbol>
+<symbol id="i-line" viewBox="0 0 32 32"><path d="M10 3.5h12a2.5 2.5 0 0 1 2.5 2.5v20a2.5 2.5 0 0 1-2.5 2.5H10A2.5 2.5 0 0 1 7.5 26V6A2.5 2.5 0 0 1 10 3.5z"/><path d="M14 7h4"/><path class="b" d="M11 12.5h6.5M14.5 17h6.5M11 21.5h5"/></symbol>
 <symbol id="i-db" viewBox="0 0 32 32"><path d="M6 8c0-2 4.5-3.5 10-3.5S26 6 26 8v16c0 2-4.5 3.5-10 3.5S6 26 6 24z"/><path d="M6 8c0 2 4.5 3.5 10 3.5S26 10 26 8"/><path class="b" d="M6 16c0 2 4.5 3.5 10 3.5S26 18 26 16"/></symbol>
 <symbol id="i-cal" viewBox="0 0 32 32"><path d="M5 8h22v19H5z"/><path d="M5 13h22M11 5v5M21 5v5"/><path class="b" d="M12 20l3 3 6-6"/></symbol>
 <symbol id="i-group" viewBox="0 0 32 32"><path d="M16 6.5a3.5 3.5 0 1 1 0 7a3.5 3.5 0 1 1 0-7z"/><path d="M8 11.5a3 3 0 1 1 0 6a3 3 0 1 1 0-6zM24 11.5a3 3 0 1 1 0 6a3 3 0 1 1 0-6z"/><path class="b" d="M3.5 26c.6-3.6 2.4-5.5 4.5-5.5M28.5 26c-.6-3.6-2.4-5.5-4.5-5.5M9.5 27c.8-5 3.4-7.5 6.5-7.5s5.7 2.5 6.5 7.5"/></symbol>
@@ -26,103 +26,111 @@
 <symbol id="i-mail" viewBox="0 0 32 32"><path d="M4 8h24v16H4z"/><path class="b" d="M4.5 9l11.5 8.5L27.5 9"/></symbol>
 <symbol id="i-key" viewBox="0 0 32 32"><path d="M11 10.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 1 1 0-11z"/><path class="b" d="M16.5 16H28M24 16v4M28 16v5"/></symbol>
 <symbol id="i-stop" viewBox="0 0 32 32"><path d="M4 22h24"/><path d="M6 22v-6h7v6M15 22V11h7v11"/><path class="b" d="M26 6v20"/></symbol>
-<symbol id="i-shield" viewBox="0 0 32 32"><path d="M16 4l10 4v7c0 6.5-4.3 11-10 13C10.3 26 6 21.5 6 15V8z"/><path class="b" d="M11.5 16l3 3 6-6.5"/></symbol>
+<symbol id="i-door" viewBox="0 0 32 32"><path d="M8 27V5h13v22"/><path d="M4 27h24"/><path class="b" d="M21 9l5 2v16"/><path d="M17 16v1"/></symbol>
 <symbol id="i-pin" viewBox="0 0 32 32"><path d="M16 28s-8.5-8.2-8.5-14.5a8.5 8.5 0 0 1 17 0C24.5 19.8 16 28 16 28z"/><path class="b" d="M16 10.5a3 3 0 1 1 0 6a3 3 0 1 1 0-6z"/></symbol>
-<symbol id="i-page" viewBox="0 0 32 32"><path d="M9 4h14a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M13 7.5h6"/><path class="b" d="M11 14h10M11 18.5h10M11 23h6"/></symbol>
 </defs></svg>
 <a class="skip" href="#main">本文へ移動</a>
 <div class="band" aria-hidden="true"></div>
 <header class="site-header">
 <a class="brand" href="../../"><img src="../../assets/taido-logo-line.svg" alt="たいど（トップへ）" width="297" height="100"></a>
-<nav aria-label="公式LINE の仕組みづくり">
-<a href="../../line/"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span>公式LINE</span></a>
-<a href="../../line/kiroku/"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg><span>記録が残る</span></a>
-<a href="../../line/yoyaku/" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg><span>予約</span></a>
+<nav aria-label="LINE公式アカウントを活用した仕組みづくり">
+<a href="../../line/"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span>一覧</span></a>
+<a href="../../line/kiroku/"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg><span>会員記録</span></a>
+<a href="../../line/yoyaku/" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg><span>承認制予約</span></a>
 <a href="../../line/chiiki/"><svg class="ic" aria-hidden="true"><use href="#i-group"/></svg><span>地域団体</span></a>
 <a href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span>相談する</span></a>
 </nav>
 </header>
 
 <main id="main">
-<nav class="crumbs" aria-label="現在地"><ol><li><a href="../../">たいど</a></li><li><a href="../../line/">公式LINE の仕組みづくり</a></li><li aria-current="page">予約の LINE</li></ol></nav>
+<nav class="crumbs" aria-label="現在地"><ol><li><a href="../../">たいど</a></li><li><a href="../../line/">LINE公式アカウントを活用した仕組みづくり</a></li><li aria-current="page">承認制予約の仕組みづくり</li></ol></nav>
 <section class="hero lp-hero" id="top" aria-labelledby="hero-title">
 <div class="hero-copy">
-<p class="kicker">公式LINE の仕組みづくり ／ 予約の LINE</p>
-<h1 id="hero-title">予約を LINE で受けて、<br>前の日に知らせる。</h1>
-<p class="hero-lead">電話と DM でばらばらに来る予約を、LINE の中のページにまとめます。お店が承認した予約は、前の日に LINE で知らせます。</p>
+<p class="kicker">LINE公式アカウントを活用 ／ 承認制予約の仕組みづくり</p>
+<h1 id="hero-title">仮予約を受けて、<br>確かめてから<br>確定する。</h1>
+<p class="hero-lead">LINE の中のページで仮予約を受け、お店が内容を確かめてから確定します。確定した予約には、前の日に知らせを送ります。</p>
+<dl class="hero-price"><div><dt>はじめに作る</dt><dd><span class="n">165,000</span>円〜</dd></div><div><dt>保守（任意）</dt><dd>月<span class="n">11,000</span>円〜</dd></div></dl>
+<p class="hero-pnote">税込。LINE公式アカウントの月額とサーバーの利用料は別で、見積書に分けて書きます。</p>
 <div class="actions">
-<a class="cta cta-down" href="#flow">どう動くかを見る</a>
+<a class="cta cta-down" href="#demo">画面の見本を見る</a>
 <a class="more more-line" data-line href="https://line.me/R/ti/p/@914vzoom" target="_blank" rel="noopener noreferrer">LINEで相談する（30分無料）</a>
 </div>
 <p class="hero-for">予約で動くお店・教室・体験のかたへ。</p>
 </div>
-<figure class="hero-figure lp-fig"><svg class="ph ph-hero1" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><rect x="14" y="42" width="80" height="18" rx="8"/><path class="mu" d="M22 51h64"/><path class="fp" d="M4 84q0-12 12-12h108q12 0 12 12V228q0 18-18 18H22q-18 0-18-18z"/><path class="mu" d="M60 80h20"/><rect class="mu" x="19" y="98" width="15" height="13" rx="2"/><rect class="mu" x="40" y="98" width="15" height="13" rx="2"/><rect class="" x="61" y="98" width="15" height="13" rx="2"/><rect class="" x="82" y="98" width="15" height="13" rx="2"/><rect class="" x="103" y="98" width="15" height="13" rx="2"/><rect class="" x="19" y="117" width="15" height="13" rx="2"/><rect class="" x="40" y="117" width="15" height="13" rx="2"/><rect class="fb" x="61" y="117" width="15" height="13" rx="2"/><rect class="" x="82" y="117" width="15" height="13" rx="2"/><rect class="" x="103" y="117" width="15" height="13" rx="2"/><rect class="" x="19" y="136" width="15" height="13" rx="2"/><rect class="" x="40" y="136" width="15" height="13" rx="2"/><rect class="" x="61" y="136" width="15" height="13" rx="2"/><rect class="" x="82" y="136" width="15" height="13" rx="2"/><rect class="" x="103" y="136" width="15" height="13" rx="2"/><rect class="" x="19" y="155" width="15" height="13" rx="2"/><rect class="" x="40" y="155" width="15" height="13" rx="2"/><rect class="" x="61" y="155" width="15" height="13" rx="2"/><rect class="" x="82" y="155" width="15" height="13" rx="2"/><rect class="" x="103" y="155" width="15" height="13" rx="2"/><rect class="fb" x="22" y="190" width="96" height="16" rx="8"/><path class="mu" d="M40 220h60"/></svg></figure>
+<figure class="hero-figure lp-fig"><div class="mk mk-talk "><div class="mk-notch" aria-hidden="true"></div><div class="mk-top"><span class="mk-av" aria-hidden="true">整</span><span class="mk-name">〇〇整体</span></div><div class="mk-body"><p class="mk-day">10月20日（火）</p><p class="mk-b">仮予約を受け付けました。お店の確認後に確定します。</p><p class="mk-b">ご予約が確定しました。10月24日（土）13:00から、60分コースです。</p><p class="mk-day">10月23日（金）</p><p class="mk-b">明日は13:00からのご予約です。変更・キャンセルは、このトークでお知らせください。</p></div><div class="mk-menu"><span>予約する</span><span>予約の確認</span><span>お店の場所</span></div><p class="mk-tag">見本</p></div><figcaption>画面は架空のデータを使った見本です</figcaption></figure>
 </section>
 <section class="sec " id="issues" aria-labelledby="issues-title">
-<p class="label"><span class="en">ISSUES</span><span class="t">こまりごと</span></p>
+<p class="label"><span class="en">ISSUES</span><span class="t">こんな困りごとに</span></p>
 <h2 id="issues-title">こんなこと、<br>ありませんか。</h2>
-<ul class="issue-list"><li>施術中・授業中は、予約の電話に出られない。</li><li>DM と電話とメモ帳で、予約がばらばら。</li><li>前の日に、一人ずつ確認の連絡をしている。</li><li>予約サービスを入れたけれど、うちの受け方に合わない。</li></ul>
+<div class="pains"><div class="pain-col"><h3>お客さんの側</h3><ul><li>いつ予約が確定したのか、わかりにくい。</li><li>営業時間外でも、空いている日を見たい。</li><li>前の日に、時間を確かめたい。</li></ul></div><div class="pain-col"><h3>お店の側</h3><ul><li>電話と DM を見比べて、確認の連絡をしている。</li><li>施術中・授業中は、予約の電話に出られない。</li><li>予約サービスを入れたけれど、確かめてから受けたい予約に合わない。</li></ul></div></div>
+<p class="note">上は、よくある困りごとの例文です。実際のお客さんの声ではありません。</p>
+</section>
+<aside class="sec honest" aria-label="先に、既製品を確かめます"><div class="honest-in"><svg class="ic ic-l" aria-hidden="true"><use href="#i-check"/></svg><div><h2 class="honest-h">先に、既製品を確かめます。</h2><p>LINE で予約を受けるだけなら、月額の予約サービスで足りることがあります。承認制の予約ができる既製品もあります。30分の相談で、既製品で足りるかを一緒に見て、足りないときだけ作ります。作るのは、確かめ方に決まりがある予約（はじめての人だけ内容を聞く、回数券や会員の記録と組み合わせる、など）です。</p></div></div></aside>
+<section class="sec " id="demo" aria-labelledby="demo-title">
+<p class="label"><span class="en">SCREENS</span><span class="t">画面の見本</span></p>
+<h2 id="demo-title">仮予約、確定、<br>前の日の知らせ。</h2>
+<ol class="demo"><li><div class="demo-scr"><div class="mk mk-page "><div class="mk-notch" aria-hidden="true"></div><div class="mk-top mk-top-page"><span class="mk-name">予約</span><span class="mk-x" aria-hidden="true">×</span></div><div class="mk-body"><div class="mk-card"><p class="mk-k">コース</p><p class="mk-row">60分コース<span>選択中</span></p></div><div class="mk-card"><p class="mk-k">日にち</p><div class="mk-days"><span>23<small>金</small></span><span class="on">24<small>土</small></span><span>25<small>日</small></span><span class="off">26<small>月</small></span></div></div><div class="mk-card"><p class="mk-k">10月24日（土）の空き</p><div class="mk-slots"><span class="off">10:00 満</span><span class="on">13:00</span><span>15:00</span></div></div><p class="mk-go">仮予約を送る</p><p class="mk-s">お店が確かめてから確定します。</p></div><p class="mk-tag">見本</p></div></div><div class="demo-txt"><p class="flow-no">01</p><h3>日時を選んで仮予約</h3><p>トークの下のメニューから予約のページを開き、空いている日時を選んで仮予約を送ります。</p></div></li><li><div class="demo-scr"><div class="mk mk-page "><div class="mk-notch" aria-hidden="true"></div><div class="mk-top mk-top-page"><span class="mk-name">管理のページ（お店）</span><span class="mk-x" aria-hidden="true">×</span></div><div class="mk-body"><div class="mk-card"><p class="mk-k">確かめる仮予約　2件</p><div class="mk-req"><p class="mk-row">10月24日（土）13:00<span>60分</span></p><p class="mk-s">Aさん・はじめて</p><p class="mk-two"><span>日時を相談</span><span class="on">確定する</span></p></div><div class="mk-req"><p class="mk-row">10月25日（日）15:00<span>60分</span></p><p class="mk-s">Bさん・3回目</p><p class="mk-two"><span>日時を相談</span><span>確定する</span></p></div></div><p class="mk-s">確定すると、お客さんに知らせが届きます。</p></div><p class="mk-tag">見本</p></div></div><div class="demo-txt"><p class="flow-no">02</p><h3>お店が確かめて確定</h3><p>仮予約が来るとお店に知らせが届きます。管理のページで内容を見て「確定する」を押します。</p></div></li><li><div class="demo-scr"><div class="mk mk-talk "><div class="mk-notch" aria-hidden="true"></div><div class="mk-top"><span class="mk-av" aria-hidden="true">整</span><span class="mk-name">〇〇整体</span></div><div class="mk-body"><p class="mk-day">10月20日（火）</p><p class="mk-b">仮予約を受け付けました。お店の確認後に確定します。</p><p class="mk-b">ご予約が確定しました。10月24日（土）13:00から、60分コースです。</p><p class="mk-day">10月23日（金）</p><p class="mk-b">明日は13:00からのご予約です。変更・キャンセルは、このトークでお知らせください。</p></div><div class="mk-menu"><span>予約する</span><span>予約の確認</span><span>お店の場所</span></div><p class="mk-tag">見本</p></div></div><div class="demo-txt"><p class="flow-no">03</p><h3>確定と、前の日の知らせ</h3><p>お客さんの LINE に「確定しました」と、前の日の知らせが届きます。送る数は月の上限の内です。</p></div></li></ol>
+<p class="note demo-note">画面は架空のデータを使った見本です。名前・日付・回数はすべて例で、実際の画面は、お店・団体の使い方に合わせて作ります。</p>
+</section>
+<section class="sec " id="messages" aria-labelledby="messages-title">
+<p class="label"><span class="en">MESSAGES</span><span class="t">送る文の例</span></p>
+<h2 id="messages-title">届く文は、<br>こう書きます。</h2>
+<table class="mtable"><caption class="vh">送る文の例</caption><thead><tr><th scope="col">いつ</th><th scope="col">文の例</th></tr></thead><tbody><tr><th scope="row">仮予約を受けたとき</th><td>「仮予約を受け付けました。お店の確認後に確定します」</td></tr><tr><th scope="row">お店が確定したとき</th><td>「ご予約が確定しました。10月24日（土）13:00から、60分コースです」</td></tr><tr><th scope="row">前の日</th><td>「明日は13:00からのご予約です。変更・キャンセルは、このトークでお知らせください」</td></tr></tbody></table>
+<p class="note">文は例です。お店の言葉に合わせて書きます。こちらから送る知らせは、1通ごとに月の通数に数えます（作り方によって数えないものもあり、見積もりでお伝えします）。</p>
+<div class="limit-box"><h3>月の上限に来たら</h3><p>送る数が月の上限に来ると、その月の「確定しました」と前の日の知らせは送りません。送れなかった予約をお店がどう知るか（管理のページに出す、など）と、お客さんへの連絡の手段（電話・トークなど）を、作る前に一緒に決めます。上限の内なら、前の日の確認を一人ずつしなくてすみます。</p></div>
 </section>
 <section class="sec " id="change" aria-labelledby="change-title">
 <p class="label"><span class="en">CHANGE</span><span class="t">こう変わる</span></p>
 <h2 id="change-title">予約が、<br>一か所に集まる。</h2>
-<ul class="change-list"><li><h3>お客さんは、LINE の中で日時を選ぶ</h3><p>トークの下のメニューから予約のページを開き、日時を選んで仮予約を送ります。</p></li><li><h3>お店は、見てから承認する</h3><p>仮予約が来るとお店に知らせが届きます。見て「承認」を押すと、お客さんに「予約が決まりました」が届きます。</p></li><li><h3>前の日に、自動で知らせる</h3><p>決まった予約には、前の日に LINE で知らせが届きます。一人ずつ連絡しなくてすみます。</p></li><li><h3>仕組みが送る知らせは、月の上限で止まる</h3><p>「決まりました」と前の日の知らせは、決めた上限で止まります。管理画面から送る一斉のお知らせも同じ通数を使うので、配分は一緒に決めます。上限に来ると、その月は知らせも止まります。</p></li></ul>
+<ul class="change-list"><li><h3>お客さんは、LINE の中で日時を選ぶ</h3><p>メニューから予約のページを開き、空いている日時を選んで仮予約を送ります。</p></li><li><h3>お店は、見てから確定する</h3><p>内容を見て「確定する」か「日時を相談」を選びます。電話の予約も、管理のページに入れておけば同じ一覧で見られます。</p></li><li><h3>変更・キャンセルの受け方を決める</h3><p>トーク・電話・予約のページのどこで受けるか、締め切りをどう伝えるかを、作る前に決めます。</p></li><li><h3>ほかの予約サイトと使うときは</h3><p>空き枠をどう合わせるかを確かめます。自動でつなげるか、その費用はどれくらいかは、見積もりでお伝えします。</p></li></ul>
 </section>
-<aside class="sec honest" aria-label="先に、既製品を確かめます"><div class="honest-in"><svg class="ic ic-l" aria-hidden="true"><use href="#i-check"/></svg><div><h2 class="honest-h">先に、既製品を確かめます。</h2><p>LINE で予約を受けるだけなら、月額の予約サービスで足りることがあります。30分の相談で、既製品で足りるかを一緒に見て、足りないときだけ作ります。たいどが作るのは、受け方に決まりがある予約（仮予約のあとにお店が承認する、回数券や会員の記録と組み合わせる、など）です。</p></div></div></aside>
-<section class="sec " id="flow" aria-labelledby="flow-title">
-<p class="label"><span class="en">FLOW</span><span class="t">作るもの</span></p>
-<h2 id="flow-title">画面の流れ。</h2>
-<p class="sec-lead">LINE の中で開く予約のページ、お店の承認のページ、知らせを送る仕組みを作ります。</p>
-<ol class="flow"><li><div class="flow-fig"><svg class="ph" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><rect x="14" y="46" width="80" height="26" rx="8"/><path class="mu" d="M22 55h64"/><path class="mu" d="M22 63h38"/><rect class="fb" x="12" y="170" width="56" height="30" rx="4"/><rect class="" x="72" y="170" width="56" height="30" rx="4"/><rect class="" x="12" y="204" width="56" height="30" rx="4"/><rect class="" x="72" y="204" width="56" height="30" rx="4"/><path class="bl dsh" d="M40 166V100"/></svg></div><div class="flow-txt"><p class="flow-no">01</p><h3>メニューから予約を開く</h3><p>トークの下のメニューから、LINE の中の予約ページへ。</p></div></li><li><div class="flow-fig"><svg class="ph" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><path class="fp" d="M4 64q0-12 12-12h108q12 0 12 12V228q0 18-18 18H22q-18 0-18-18z"/><path class="mu" d="M60 60h20"/><rect class="mu" x="19" y="84" width="15" height="13" rx="2"/><rect class="mu" x="40" y="84" width="15" height="13" rx="2"/><rect class="" x="61" y="84" width="15" height="13" rx="2"/><rect class="" x="82" y="84" width="15" height="13" rx="2"/><rect class="" x="103" y="84" width="15" height="13" rx="2"/><rect class="" x="19" y="103" width="15" height="13" rx="2"/><rect class="" x="40" y="103" width="15" height="13" rx="2"/><rect class="fb" x="61" y="103" width="15" height="13" rx="2"/><rect class="" x="82" y="103" width="15" height="13" rx="2"/><rect class="" x="103" y="103" width="15" height="13" rx="2"/><rect class="" x="19" y="122" width="15" height="13" rx="2"/><rect class="" x="40" y="122" width="15" height="13" rx="2"/><rect class="" x="61" y="122" width="15" height="13" rx="2"/><rect class="" x="82" y="122" width="15" height="13" rx="2"/><rect class="" x="103" y="122" width="15" height="13" rx="2"/><rect class="" x="19" y="141" width="15" height="13" rx="2"/><rect class="" x="40" y="141" width="15" height="13" rx="2"/><rect class="" x="61" y="141" width="15" height="13" rx="2"/><rect class="" x="82" y="141" width="15" height="13" rx="2"/><rect class="" x="103" y="141" width="15" height="13" rx="2"/><rect class="fb" x="22" y="176" width="96" height="16" rx="8"/><path class="mu" d="M40 208h60"/></svg></div><div class="flow-txt"><p class="flow-no">02</p><h3>日時を選んで仮予約</h3><p>空いている日時から選んで送ります。</p></div></li><li><div class="flow-fig"><svg class="ph" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><rect class="fp" x="12" y="44" width="116" height="30" rx="8"/><circle class="bl" cx="27" cy="59" r="7"/><path d="M41 55h70"/><path class="mu" d="M41 64h46"/><path class="fp" d="M4 108q0-12 12-12h108q12 0 12 12V228q0 18-18 18H22q-18 0-18-18z"/><path class="mu" d="M60 104h20"/><circle cx="24" cy="128" r="5"/><path d="M36 125h70"/><path class="mu" d="M36 133h44"/><circle cx="24" cy="150" r="5"/><path d="M36 147h64"/><path class="mu" d="M36 155h44"/><rect class="fb" x="66" y="182" width="52" height="16" rx="8"/><rect x="22" y="182" width="38" height="16" rx="8"/></svg></div><div class="flow-txt"><p class="flow-no">03</p><h3>お店が承認する</h3><p>仮予約の知らせを見て、承認を押します。</p></div></li><li><div class="flow-fig"><svg class="ph" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><rect x="14" y="46" width="100" height="34" rx="8"/><path class="mu" d="M22 55h84"/><path class="mu" d="M22 63h84"/><path class="mu" d="M22 71h50"/><circle class="bl" cx="70" cy="132" r="16"/><path class="bl" d="M64 132l4 4.5 8-9"/><rect class="bl" x="66" y="178" width="60" height="18" rx="8"/><path class="bl" d="M74 187h44"/></svg></div><div class="flow-txt"><p class="flow-no">04</p><h3>予約が決まる</h3><p>お客さんに「予約が決まりました」が届きます。</p></div></li><li><div class="flow-fig"><svg class="ph" viewBox="0 0 140 250" aria-hidden="true" focusable="false"><rect class="ph-f" x="4" y="4" width="132" height="242" rx="18"/><path d="M58 15h24"/><path d="M4 34h132"/><rect class="fp" x="12" y="44" width="116" height="30" rx="8"/><circle class="bl" cx="27" cy="59" r="7"/><path class="bl" d="M27 55v4l3 2"/><path d="M41 55h70"/><path class="mu" d="M41 64h46"/><rect x="14" y="92" width="96" height="26" rx="8"/><path class="mu" d="M22 101h80"/><path class="mu" d="M22 109h48"/><rect x="22" y="200" width="96" height="12" rx="6"/><rect class="fb" x="24" y="202" width="50.6" height="8" rx="4"/><path d="M110 192v28" style="stroke-width:2.2"/></svg></div><div class="flow-txt"><p class="flow-no">05</p><h3>前の日に知らせる</h3><p>決まった予約に、前の日の知らせ。送る数は上限まで。</p></div></li></ol>
-</section>
-<section class="sec " id="works" aria-labelledby="works-title">
-<p class="label"><span class="en">WORKS</span><span class="t">作例</span></p>
-<h2 id="works-title">承認すると、<br>本人に知らせが届く。</h2>
-<div class="work-np">
-<a class="np-logo" href="https://nirareba0.github.io/toi-site/" target="_blank" rel="noopener noreferrer"><img src="../../assets/nandepost-lockup-h.png" alt="なんでポスト（サイトを新しいタブで開く）" width="720" height="180" loading="lazy"></a>
-<div class="np-body">
-<p class="np-lead">韮崎の中高生の「なんで？」に、地域の大人が返事を書く場所（運営 たいど）。そのサイトと公式LINE をつなぐ仕組みを、たいどが組みました。こういう仕組みを作れる、という作例です。</p>
-<ul class="dots"><li>なんでポストは予約の仕組みではありませんが、「運営が確かめて承認すると、本人の LINE に知らせが届く」つくりは、予約の承認と同じです</li><li>こちらから送る知らせには月の上限をつけ、超えた分は送りません</li></ul>
-<p class="note">上の仕組みは、本番の LINE の上で、作ったたいどが試しの端末で一通り動くことを確かめたものです。LINE ログインとプライバシーポリシー・利用規約は、まだ公開前です。中高生の投稿や個人のことは、ここには載せません。</p>
-<div class="actions"><a class="more more-out" href="https://nirareba0.github.io/toi-site/" target="_blank" rel="noopener noreferrer">なんでポストを見る</a></div>
-</div>
-</div>
-</section>
+<aside class="sec np-mini" aria-label="作例について"><p>「承認すると、本人の LINE に知らせが届く」作りは、たいどが運営する<a href="https://nirareba0.github.io/toi-site/" target="_blank" rel="noopener noreferrer">なんでポスト</a>で、本番の LINE公式アカウントを使って確かめました。なんでポストは予約の仕組みではなく、予約の作例はまだありません。上の画面は、予約のために描いた見本です。</p></aside>
 <section class="sec " id="process" aria-labelledby="process-title">
 <p class="label"><span class="en">PROCESS</span><span class="t">進め方</span></p>
 <h2 id="process-title">はじめの30分は、<br>無料。</h2>
-<ol class="proc"><li><p class="proc-no">01</p><h3>はじめの30分の相談<span class="proc-tag">無料</span></h3><p>LINE でひとこと。オンラインか、韮崎の近くなら会って話します。困りごとと、既製品で足りるかを一緒に見ます。</p></li><li><p class="proc-no">02</p><h3>見積もり</h3><p>作るもの・値段・日程を、見積書にしてお出しします。この範囲から増やすときは、作業の前に相談します。</p></li><li><p class="proc-no">03</p><h3>作る</h3><p>あなたの名義で公式LINE と記録の場所を用意し、たいどは開発者として加わります。途中で、試しの画面を一緒に触ります。</p></li><li><p class="proc-no">04</p><h3>渡す</h3><p>使い方の1枚をつけて渡します。たいどの権限を残すか外すかも、ここで決めます。</p></li><li><p class="proc-no">05</p><h3>保守<span class="proc-tag">月11,000円〜</span></h3><p>軽い更新を月2件まで。LINE 側の仕様が変わったときにどこまで直すかは、保守の契約に書きます。</p></li></ol>
+<ol class="proc"><li><p class="proc-no">01</p><h3>はじめの30分の相談<span class="proc-tag">無料</span></h3><p>LINEでメッセージを。オンラインか、韮崎の近くなら会って話します。困りごとと、既製品で足りるかを一緒に見ます。</p></li><li><p class="proc-no">02</p><h3>見積もり</h3><p>作るもの・値段・日程・別にかかる料金を、見積書にしてお出しします。この範囲から増やすときは、作業の前に相談します。</p></li><li><p class="proc-no">03</p><h3>作る</h3><p>あなたの名義で LINE公式アカウントと記録の場所を用意してもらい、たいどは作業の権限をもらって加わります。途中で、試しの画面を一緒に触ります。</p></li><li><p class="proc-no">04</p><h3>渡す</h3><p>使い方の説明書をつけて渡します。たいどの権限を外すか、保守のあいだだけ残すかも、ここで決めます。</p></li><li><p class="proc-no">05</p><h3>保守（任意）<span class="proc-tag">月11,000円〜</span></h3><p>毎月の動作の確認と通数の見張り、軽い更新を月2件まで。頼むかどうかは選べます。</p></li></ol>
 </section>
 <section class="sec " id="price" aria-labelledby="price-title">
 <p class="label"><span class="en">PRICE</span><span class="t">値段</span></p>
-<h2 id="price-title">作るとき、<br>165,000円から。</h2>
-<div class="price-box">
-<div class="pb pb-main"><p class="pb-k">作る（はじめの一式）</p><p class="pb-num"><span class="n">165,000</span>円〜<small>税込</small></p></div>
-<div class="pb pb-sub"><p class="pb-k">保守</p><p class="pb-num s"><span class="n">11,000</span>円〜<small>／月・税込</small></p><p class="pb-t">軽い更新を月2件まで。</p></div>
-</div>
+<h2 id="price-title">はじめに作るのは、<br>165,000円から。</h2>
+<table class="ptable"><caption class="vh">値段の内訳</caption><tbody><tr><th scope="row">はじめに作る</th><td><strong><span class="n">165,000</span>円〜</strong>（税込）。下の「はじめの一式」が「〜から」の中身です。画面やつなぐものが増えると上がります。</td></tr><tr><th scope="row">保守（任意）</th><td><strong>月<span class="n">11,000</span>円〜</strong>（税込）。月ごとの契約で、最低の期間はありません。やめるときは1か月前までにお知らせください。保守を頼まなくても、渡した仕組みはそのまま使えます（止まったときの直しは、そのつど見積もります）。</td></tr><tr><th scope="row">別にかかる料金</th><td>LINE公式アカウントの月額（無料のプランは月200通まで）と、記録をためるサーバーの利用料は、たいどの代金とは別です。あなたから各社へ直接お支払いいただき、見積書にも分けて書きます。韮崎市の外へ伺うときの交通費も別です。</td></tr><tr><th scope="row">やめたとき</th><td>LINE公式アカウント・友だち・あなたの名義の記録は、そのまま手元に残ります。何が動き続け、何が止まるか（保守が終わると、不具合や仕様の変更への直しは止まります）と、データの渡し方（CSV など）を、契約の前にお伝えします。</td></tr><tr><th scope="row">12か月の試算</th><td>保守を12か月続けた場合、はじめの165,000円＋保守11,000円×12か月＝<strong><span class="n">297,000</span>円〜</strong>（税込）。別にかかる料金は含みません。</td></tr></tbody></table>
 <h3 class="incl-h">はじめの一式に入るもの</h3>
-<ul class="incl"><li>聞き取りと設計（予約の受け方・承認の流れ）</li><li>LINE の中で開く予約のページ</li><li>お店の承認のページ</li><li>「決まりました」と前の日の知らせ（月の上限つき）</li><li>トークの下のメニュー</li><li>使い方の1枚</li></ul>
-<p class="note">値段は、作るものの量で変わります。30分の相談のあと、作るもの・値段・日程を見積書でお出しし、書面で契約してから作ります。上の一式が「〜から」の値段の中身で、画面やつなぐものが増えると上がります。記録をためる場所（サーバー）の利用料がかかるときと、韮崎市の外へ伺うときの交通費は、見積書で別にお伝えします。事業・団体のための仕組みづくりです。LINE 公式アカウントの月額（無料のプランは月200通まで）は、これとは別に、LINEヤフーへ直接お支払いいただきます。</p>
+<ul class="incl"><li>聞き取りと設計（予約の受け方・確かめ方・変更とキャンセル）</li><li>LINE の中で開く予約のページ</li><li>お店が使う管理のページ（確定・日時の相談）</li><li>「仮予約を受けました」「確定しました」と前の日の知らせ（月の上限つき）</li><li>トークの下のメニュー</li><li>使い方の説明書</li></ul>
+<div class="hosyu">
+<div class="hosyu-col"><h3>保守の「軽い更新」の例（月2件まで）</h3><ul><li>あいさつや、自動で返す文を変える</li><li>メニューの画像を差し替える</li><li>ボタンの文を変える</li><li>月の通数の上限の数字を変える</li></ul></div>
+<div class="hosyu-col hosyu-out"><h3>保守に入らないもの（別に見積もります）</h3><ul><li>新しい画面や機能を足す</li><li>ほかのサービスとつなぐ</li><li>LINE側の大きな仕様の変更で、作り直しが要るもの</li><li>24時間の対応・その日のうちの復旧の約束</li></ul></div>
+</div>
+<p class="note">実際の値段は、30分の相談のあと、作るもの・値段・日程を見積書でお出しし、書面で契約してから作ります。事業・団体のための仕組みづくりです。LINE側の仕様が変わったとき、保守でどこまで直すかと、止まったときの受け付けと対応の目安は、契約の前にお伝えします。</p>
 </section>
 <section class="sec faq" id="faq" aria-labelledby="faq-title">
 <p class="label"><span class="en">FAQ</span><span class="t">よく聞かれること</span></p>
 <h2 id="faq-title">頼む前に。</h2>
-<div class="faq-list"><details><summary>公式LINE は、だれの名義になりますか？</summary><p>あなたのお店・団体の名義です。LINE の開発者向けの公式文書に「一度作成したチャネルを、後から他のプロバイダーに移動することはできません」とあります（<a href="https://developers.line.biz/ja/docs/line-developers-console/overview/" target="_blank" rel="noopener noreferrer">LINE Developers コンソールの概要</a>）。だから、はじめからあなたの名義で作り、たいどは開発者の権限をもらって作業します。契約が終わったら権限を外すだけで、LINE も友だちも、あなたの手元に残ります。記録をためる場所も、できるだけあなたの名義のアカウントに置きます。受け口や記録を動かす場所がたいどの名義になるときは、移す手順と費用を見積書に書きます。</p></details><details><summary>予約サービスと、何が違いますか？</summary><p>月額の予約サービスで足りるなら、そちらをおすすめします。たいどが作るのは、受け方に決まりがある予約です。仮予約のあとにお店が承認する、回数券や会員の記録と組み合わせる、など。</p></details><details><summary>あとから、費用が膨らみませんか？</summary><p>作る費用は、見積書で先に決めます。範囲を広げるときは、作業の前に相談します。月の費用は2つに分かれます。LINE 公式アカウントの月額はあなたから LINEヤフーへ直接、たいどの保守（月11,000円〜）はたいどへ。仕組みが送る知らせには月の上限をつけ、上限を超えては送りません。管理画面から送る一斉のお知らせも同じ通数を使うので、配分を一緒に決めます。記録をためる場所の利用料がかかるかどうかも、見積もりのときに先にお伝えします。</p></details><details><summary>自分で更新できますか？</summary><p>一斉のお知らせは、LINE の管理画面からご自身で送れます。記録の項目や、ページのつくり、自動で返す言葉を変えるのは、保守（軽い更新を月2件まで）で受けます。配信の設定を毎週ご自身で細かく変えたいなら、月額の配信ツールのほうが合うこともあります。30分の相談で、どちらが合うかをお話しします。</p></details><details><summary>LINE の規約は、大丈夫ですか？</summary><p><a href="https://terms2.line.me/official_account_terms_jp?lang=ja" target="_blank" rel="noopener noreferrer">LINE 公式アカウントの利用規約</a>と、開発者向けの<a href="https://terms2.line.me/LINE_Developers_user_data_policy?lang=ja" target="_blank" rel="noopener noreferrer">LINE ユーザーデータポリシー</a>に沿って作ります。たとえば、集める情報と使い道を示して同意をいただく、LINE との連携を外す方法と退会の方法を用意する、パスワードを求めない、など。規約の読み方で迷うところは、作る前にお伝えし、LINEヤフーの窓口などで確かめます。</p></details><details><summary>効果は約束されますか？</summary><p>予約の数や売上などの数字は、約束しません。約束するのは、見積書に書いた仕組みを作って、使える形で渡すことです。</p></details><details><summary>止まったときは、どうなりますか？</summary><p>連絡の受け方と、直すまでの目安は、保守の契約で決めます。たいどは一人で動いているので、24時間の見張りはしていません。</p></details></div>
+<div class="faq-list"><details><summary>予約サービスと、何が違いますか？</summary><p>月額の予約サービスで足りるなら、そちらをおすすめします。たいどが作るのは、確かめ方に決まりがある予約です。はじめての人だけ内容を聞いてから確定する、回数券や会員の記録と組み合わせる、など。</p></details><details><summary>電話や、ほかの予約サイトと一緒に使えますか？</summary><p>使い方しだいです。空き枠をどう合わせるか（管理のページに手で入れる、など）を確かめます。ほかの予約サイトと自動でつなげられるか、その費用はどれくらいかは、見積もりでお伝えします。</p></details><details><summary>変更・キャンセルは、どう受けますか？</summary><p>トーク・電話・予約のページのどこで受けるかと、締め切りの伝え方を、作る前に決めます。受けた変更は、お店が管理のページで直します。</p></details><details><summary>どれくらいで使い始められますか？</summary><p>作る範囲と着手の時期を確かめて、試しの画面を触れる日と、使い始める予定の日を見積書に書きます。審査や設定に日数がかかる作りなら、その期間も分けてお伝えします。いまは相談と見積もりを受けていて、作り始めは2027年1月からの予定です。</p></details><details><summary>いま使っている LINE公式アカウントに、足せますか？</summary><p>いまの設定と、使っているサービスを確かめてから提案します。ほかの配信ツールや予約サービスとつないでいるときは、その連携への影響と、引き継げるかを先に調べます。Messaging API のチャネルが、すでにほかの会社の名義のプロバイダーにあるときは移せないので、その扱いも先にお伝えします。</p></details><details><summary>LINE公式アカウントは、だれの名義になりますか？</summary><p>あなたのお店・団体の名義です。LINE のチャネルはあとから別の名義に移せないため、はじめからあなたの名義で作り、たいどは作業の権限をもらって加わります。くわしくは<a href="../#faq">入口のよくある質問</a>に書いています。</p></details><details><summary>効果は約束されますか？</summary><p>予約の数や売上、友だちの数などの数字は、約束しません。約束するのは、見積書に書いた仕組みを作って、使える形で渡すことです。</p></details><details><summary>止まったときは、どうなりますか？</summary><p>保守を頼んでいるときは、連絡の受け方と、見るまでの目安を契約に書きます。たいどは一人で動いているので、24時間の見張りや、その日のうちの復旧は約束できません。LINE やサーバーの会社の側の障害は、たいどが直せるものではないので、そう伝えて待ちます。</p></details></div>
+</section>
+<section class="sec maker" id="maker" aria-labelledby="maker-title">
+<p class="label"><span class="en">MAKER</span><span class="t">作る人</span></p>
+<h2 id="maker-title">作るのは、<br>たいどの西村直樹です。</h2>
+<div class="maker-in">
+<p>作るのは、個人事業「たいど」の西村直樹です。山梨県韮崎市を拠点に、組織づくり・広告企画と、Web と LINE公式アカウントをつなぐ仕組みづくりをしています。相談から作る・渡す・保守まで、同じ一人が受けます。韮崎・北杜・南アルプスあたりなら、お店や団体に伺って、画面を一緒に触りながら決めます。遠くても、オンラインで。</p>
+<p class="maker-go"><a href="../../#about">作り手について（たいどのトップへ）</a></p>
+</div>
 </section>
 <section class="sec contact" id="contact" aria-labelledby="contact-title">
 <p class="label"><span class="en">CONTACT</span><span class="t">相談する</span></p>
 <h2 id="contact-title">まず、<br>30分話す。</h2>
-<p class="sec-lead">「こういうこと、できる？」の一言で大丈夫です。LINE でひとこと送ってください。オンラインでも、韮崎の近くなら会ってでも。はじめの30分は無料です。</p>
+<p class="sec-lead">まだ作るものが決まっていなくても大丈夫です。「業種・団体の種類」と「いま困っていること」を、LINEで送ってください。30分の無料相談で、既製品で足りるか、作るならどこまで要るかを一緒に整理します。オンラインでも、韮崎の近くなら会ってでも。</p>
+<div class="send-ex"><p class="send-k">送る文の例</p><p class="send-t">「体験の予約を、内容を確かめてから確定したいです」</p><p class="send-t">「電話とDMで来る予約を、ひとつにまとめたいです」</p></div>
 <div class="contact-ways one">
-<a class="way-btn way-line" data-line href="https://line.me/R/ti/p/@914vzoom" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>LINEで相談する</strong><small>たいどの公式LINE（@914vzoom）に、ひとこと送るだけ</small></span></a>
+<a class="way-btn way-line" data-line href="https://line.me/R/ti/p/@914vzoom" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>LINEで相談する</strong><small>たいどの LINE公式アカウント（@914vzoom）を友だち追加したあと、メッセージを送ってください</small></span></a>
 </div>
-<p class="note">LINE は新しいタブで開きます。いただいた内容は、返信と相談のご案内にだけ使います（<a href="../../privacy.html">個人情報の扱い</a>）。</p>
+<p class="note">友だち追加だけでは、相談の受け付けになりません。追加のあと、ひとことメッセージを送ってください。LINE は新しいタブで開きます。いただいた内容は、返信と相談のご案内にだけ使います（<a href="../../privacy.html">個人情報の扱い</a>）。</p>
 </section>
 </main>
 
 <footer class="site-footer">
 <img src="../../assets/taido-logo-line.svg" alt="たいど" width="297" height="100">
 <p>たいどを整える ／ 組織づくり・広告企画<br>西村直樹（山梨県韮崎市・全国オンライン）</p>
-<p class="copy"><a href="../../line/">公式LINE の仕組みづくり</a>　<a href="../../">たいど トップ</a>　<a href="../../privacy.html">個人情報の扱い</a>　© 2026 西村直樹</p>
+<p class="copy"><a href="../../line/">LINE公式アカウントを活用した仕組みづくり</a>　<a href="../../">たいど トップ</a>　<a href="../../privacy.html">個人情報の扱い</a>　© 2026 西村直樹</p>
+<p class="tm">本サービスは、たいどが提供する独立したサービスです。LINEヤフー株式会社が提供・認定するサービスではありません。LINEはLINEヤフー株式会社の登録商標です。</p>
 </footer>
 </body></html>
