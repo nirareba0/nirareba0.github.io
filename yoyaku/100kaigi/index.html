@@ -132,7 +132,7 @@ function render() {
   keep();
   const list = avail();
   let h = `<h2><b>1</b>登壇する日</h2>
-  <input id="ev" type="date" value="${st.ev}" min="${todayKey()}">
+  <input id="ev" type="date" value="${st.ev}" min="${todayKey()}" max="${keyOf(new Date(Date.now() + 63 * 86400000).toISOString())}">
   <p class="hint">登壇の回が決まっていない方は、このトークで西村にご相談ください。</p>`;
   if (st.ev) {
     h += `<h2><b>2</b>インタビューの日時</h2>`;
