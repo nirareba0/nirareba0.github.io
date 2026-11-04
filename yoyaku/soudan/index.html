@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>相談の予約｜たいど</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--paper:#fcf7ef;--card:#fff;--ink:#141414;--muted:#5b574f;--rule:#ddd5c5;--accent:#c0603a;--accent2:#f5e4d8;--off:#eee8dc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.8 "Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;letter-spacing:.03em}
+.wrap{max-width:560px;margin:0 auto;padding:20px 16px 150px}
+.k{font-size:13px;color:var(--accent);letter-spacing:.14em;font-weight:600;margin:0}
+h1{font-size:24px;line-height:1.5;margin:6px 0 4px}
+.lead{color:var(--muted);font-size:14px;margin:0 0 8px}
+h2{font-size:17px;margin:28px 0 10px;display:flex;gap:8px;align-items:center}
+h2 b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;flex:none}
+input[type=text],input[type=email],textarea{width:100%;border:1.5px solid var(--rule);border-radius:10px;padding:12px;font:inherit;background:var(--card);color:inherit}
+textarea{min-height:96px}
+label.f{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.hint{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.cal{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;padding:12px}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-h strong{font-size:17px}
+.cal-h button{border:1.5px solid var(--rule);background:var(--paper);border-radius:999px;width:38px;height:38px;font-size:18px;cursor:pointer;color:inherit}
+.cal-h button:disabled{opacity:.3}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.grid .w{font-size:12px;color:var(--muted);padding:2px 0}
+.grid .w:first-child{color:#b3261e}.grid .w:nth-child(7){color:#1d4ed8}
+.d{aspect-ratio:1/1;min-width:0;width:100%;padding:0;border:0;border-radius:10px;background:transparent;font:600 15px/1 inherit;font-family:inherit;color:#b9b1a3;display:grid;place-items:center;position:relative}
+.d.ok{background:var(--accent2);color:var(--ink);cursor:pointer}
+.d.ok::after{content:"";position:absolute;bottom:6px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.d.sel{background:var(--accent);color:#fff}.d.sel::after{background:#fff}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.slot{border:1.5px solid var(--rule);background:var(--card);border-radius:10px;padding:11px 0;font:600 16px/1 inherit;font-family:inherit;color:inherit;cursor:pointer}
+.slot[aria-pressed=true]{border-color:var(--accent);background:var(--accent);color:#fff}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:4px}
+.opts{display:grid;gap:8px}
+.pl{display:flex;gap:12px;align-items:flex-start;text-align:left;border:1.5px solid var(--rule);background:var(--card);border-radius:12px;padding:12px 14px;font:inherit;color:inherit;cursor:pointer;width:100%}
+.pl .r{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--rule);margin-top:3px}
+.pl[aria-pressed=true]{border-color:var(--accent);background:var(--accent2)}
+.pl[aria-pressed=true] .r{border:6px solid var(--accent)}
+.pl strong{display:block;font-size:15.5px}.pl small{display:block;font-size:12.5px;color:var(--muted);line-height:1.6}
+.alt{margin-top:32px;border:1.5px dashed var(--rule);border-radius:14px;padding:14px 16px;background:var(--card)}
+.alt p{margin:0 0 10px;font-size:14px}
+.btn2{display:block;text-align:center;border:1.5px solid var(--ink);border-radius:999px;padding:12px 0;font-weight:700;color:var(--ink);text-decoration:none}
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(252,247,239,.97);border-top:1px solid var(--rule);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.bar .in{max-width:560px;margin:0 auto}
+.sum{font-size:13px;color:var(--muted);margin:0 0 8px;min-height:1.4em}
+.go{display:block;width:100%;border:0;border-radius:999px;background:var(--accent);color:#fff;font:700 17px/1 inherit;font-family:inherit;padding:16px 0;cursor:pointer;text-align:center;text-decoration:none}
+.go:disabled{opacity:.4}
+.go.line{background:#06c755}
+.msg{background:var(--card);border:1.5px solid var(--rule);border-radius:12px;padding:16px;margin-top:12px;font-size:15px}
+.err{color:#b3261e;font-size:14px;margin:10px 0 0}
+.done .card{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;padding:16px;margin:16px 0}
+.done dt{font-size:12.5px;color:var(--muted)}.done dd{margin:0 0 10px;font-weight:600}
+.loading{color:var(--muted);padding:24px 0}
+.note{font-size:12px;color:var(--muted);margin-top:28px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head><body>
+<div class="wrap" id="app">
+<p class="k">たいど</p>
+<h1>相談の予約</h1>
+<p class="lead">コーチングのこと、AI の導入や IT のこと。空いている時間から選んでください。1回60分、はじめてのご相談は無料です。</p>
+<div id="body"><p class="loading">空いている時間を読み込んでいます…</p></div>
+<div class="alt" id="alt"><p>合う時間がないとき・うまく選べないときは、こちらからも予約できます。</p><a class="btn2" id="calendly" href="#" target="_blank" rel="noopener">Calendly で日時を選ぶ</a></div>
+<p class="note">書いていただいた内容は、日程の調整とご相談の準備にだけ使います。予定は西村のカレンダーに入ります。</p>
+</div>
+<div class="bar" id="bar" hidden><div class="in"><p class="sum" id="sum"></p><button class="go" id="go" disabled>この内容で予約する</button><p class="err" id="err" hidden></p></div></div>
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbyevzHDitgKhgKSizgf1Wur1HIUe7OdqDAUMUNemNcTbyyfuvQV-CVbkgQDt_E7EXcb/exec';
+const CALENDLY = 'https://calendly.com/zhishux876/60min';
+const LINE_OA = '%40914vzoom'; // たいどの公式アカウント（@914vzoom）
+const W = '日月火水木金土';
+const PURPOSES = [
+  { id: 'coaching', t: 'コーチング', s: 'これからのこと・仕事のこと・チームのこと' },
+  { id: 'ai', t: 'AI の導入・IT のこと', s: 'AI の使い方、LINE・ホームページ・パソコンなど' },
+  { id: 'other', t: 'まだ決まっていない・そのほか', s: '話しながら決めましょう' },
+];
+const PLACES = [
+  { id: 'online', t: 'オンライン（Google Meet）', s: 'URL は前の日までにお送りします', ph: '（書かなくて大丈夫です）' },
+  { id: 'meet', t: '会って', s: '韮崎市内か近くで。場所はあとで一緒に決めます', ph: '例: 職場に来てほしい、など' },
+];
+const inLine = /\bLine\//i.test(navigator.userAgent);
+const st = { slots: [], purpose: '', month: null, day: null, start: null, place: 'online', contact: inLine ? 'line' : 'email' };
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2, '0');
+const J = iso => new Date(new Date(iso).getTime() + 9 * 3600000); // 日本時間で読む（UTC の getter を使う）
+const keyOf = iso => { const d = J(iso); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()) };
+const hm = iso => { const d = J(iso); return pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) };
+const lbl = key => { const [y, m, d] = key.split('-').map(Number); const w = new Date(Date.UTC(y, m - 1, d)).getUTCDay(); return m + '/' + d + '（' + W[w] + '）' };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+$('#calendly').href = CALENDLY;
+
+async function main() {
+  try { const r = await fetch(API + '?action=slots&kind=soudan'); const j = await r.json(); if (!j.ok) throw 0; st.slots = j.slots || [] }
+  catch (e) { $('#body').innerHTML = '<div class="msg">空いている時間を読み込めませんでした。下の Calendly から予約するか、少しあとで開き直してください。</div>'; return }
+  render();
+}
+
+function opt(list, cur, attr) {
+  return `<div class="opts">${list.map(p => `<button class="pl" ${attr}="${p.id}" aria-pressed="${p.id === cur}"><span class="r"></span><span><strong>${p.t}</strong><small>${p.s}</small></span></button>`).join('')}</div>`;
+}
+
+function calHtml(list) {
+  const days = new Set(list.map(keyOf));
+  const months = [...new Set(list.map(s => keyOf(s).slice(0, 7)))];
+  if (!st.month || !months.includes(st.month)) st.month = months[0];
+  const [y, m] = st.month.split('-').map(Number);
+  const first = new Date(Date.UTC(y, m - 1, 1)).getUTCDay();
+  const n = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const i = months.indexOf(st.month);
+  let cells = W.split('').map(w => `<div class="w">${w}</div>`).join('');
+  for (let k = 0; k < first; k++) cells += '<div></div>';
+  for (let d = 1; d <= n; d++) {
+    const key = y + '-' + pad(m) + '-' + pad(d);
+    const ok = days.has(key);
+    const cls = ['d', ok ? 'ok' : '', key === st.day ? 'sel' : ''].join(' ');
+    cells += ok ? `<button class="${cls}" data-day="${key}" aria-label="${lbl(key)}">${d}</button>` : `<div class="${cls}">${d}</div>`;
+  }
+  return `<div class="cal"><div class="cal-h"><button id="prev" ${i <= 0 ? 'disabled' : ''} aria-label="前の月">‹</button><strong>${y}年${m}月</strong><button id="next" ${i >= months.length - 1 ? 'disabled' : ''} aria-label="次の月">›</button></div>
+  <div class="grid">${cells}</div>
+  <div class="legend"><span><i style="background:var(--accent2)"></i>予約できる日</span><span><i style="background:var(--accent)"></i>選んだ日</span></div></div>`;
+}
+
+function render() {
+  keep();
+  const list = st.slots;
+  const P = PLACES.find(p => p.id === st.place);
+  let h = `<h2><b>1</b>ご相談の内容</h2>${opt(PURPOSES, st.purpose, 'data-purpose')}
+  <h2><b>2</b>日時</h2>`;
+  if (!list.length) h += `<div class="msg">いま、予約できる空き時間がありません。下の Calendly からどうぞ。</div>`;
+  else {
+    h += calHtml(list);
+    if (st.day && list.some(s => keyOf(s) === st.day)) h += `<div class="slots">${list.filter(s => keyOf(s) === st.day).map(s => `<button class="slot" data-start="${s}" aria-pressed="${s === st.start}">${hm(s)}</button>`).join('')}</div>`;
+    else h += `<p class="hint">色のついた日を押すと、始まりの時間が出ます。1回60分です。火曜日はお休みです。前の日までの予約になります。</p>`;
+  }
+  h += `<h2><b>3</b>話し方</h2>${opt(PLACES, st.place, 'data-place')}
+  <label class="f" for="place">メモ（任意）</label>
+  <input id="place" type="text" maxlength="100" placeholder="${P.ph}" value="${esc(st.placeDetail || '')}">
+  <h2><b>4</b>お名前と連絡先</h2>
+  <label class="f" for="name">お名前</label>
+  <input id="name" type="text" maxlength="40" autocomplete="name" value="${esc(st.name || '')}" placeholder="例: 山田 花子">
+  <label class="f">確認の連絡は</label>
+  ${opt([{ id: 'line', t: 'LINE のトークで', s: '予約のあと、内容をたいどの公式LINE に送る画面が出ます' }, { id: 'email', t: 'メールで', s: 'メールアドレスを書いてください' }], st.contact, 'data-contact')}
+  ${st.contact === 'email' ? `<label class="f" for="email">メールアドレス</label><input id="email" type="email" maxlength="120" autocomplete="email" inputmode="email" value="${esc(st.email || '')}" placeholder="例: hanako@example.com">` : ''}
+  <label class="f" for="note">気になっていること（任意）</label>
+  <textarea id="note" maxlength="500" placeholder="いま困っていること、聞いてみたいことなど">${esc(st.note || '')}</textarea>
+  <div class="hp" aria-hidden="true"><label>website<input id="website" type="text" tabindex="-1" autocomplete="off"></label></div>`;
+  $('#body').innerHTML = h;
+  $('#bar').hidden = false;
+  document.querySelectorAll('[data-purpose]').forEach(b => b.onclick = () => { st.purpose = b.dataset.purpose; render() });
+  document.querySelectorAll('[data-day]').forEach(b => b.onclick = () => { st.day = b.dataset.day; st.start = null; render() });
+  document.querySelectorAll('.slot').forEach(b => b.onclick = () => { st.start = b.dataset.start; render() });
+  document.querySelectorAll('[data-place]').forEach(b => b.onclick = () => { st.place = b.dataset.place; render() });
+  document.querySelectorAll('[data-contact]').forEach(b => b.onclick = () => { st.contact = b.dataset.contact; render() });
+  const months = [...new Set(list.map(s => keyOf(s).slice(0, 7)))];
+  if ($('#prev')) $('#prev').onclick = () => { st.month = months[months.indexOf(st.month) - 1]; render() };
+  if ($('#next')) $('#next').onclick = () => { st.month = months[months.indexOf(st.month) + 1]; render() };
+  ['#place', '#name', '#email', '#note'].forEach(s => { if ($(s)) $(s).oninput = () => { keep(); upd() } });
+  upd();
+}
+function keep() { [['#place', 'placeDetail'], ['#name', 'name'], ['#email', 'email'], ['#note', 'note']].forEach(([s, k]) => { if ($(s)) st[k] = $(s).value }) }
+const okMail = () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((st.email || '').trim());
+function upd() {
+  const P = PLACES.find(p => p.id === st.place), U = PURPOSES.find(p => p.id === st.purpose);
+  const miss = !st.purpose ? 'ご相談の内容を選んでください' : !st.start ? '日時を選んでください' : !(st.name || '').trim() ? 'お名前を書いてください' : (st.contact === 'email' && !okMail()) ? 'メールアドレスを書いてください' : '';
+  $('#sum').textContent = miss || `${U.t}・${lbl(keyOf(st.start))} ${hm(st.start)}〜・${P.t}`;
+  $('#go').disabled = !!miss;
+}
+
+$('#go').onclick = async () => {
+  keep(); $('#go').disabled = true; $('#err').hidden = true; $('#go').textContent = '予約しています…';
+  const body = { kind: 'soudan', purpose: st.purpose, start: st.start, name: (st.name || '').trim(), contact: st.contact, email: st.contact === 'email' ? (st.email || '').trim() : '', placeType: st.place, placeDetail: (st.placeDetail || '').trim(), note: (st.note || '').trim(), website: $('#website') ? $('#website').value : '' };
+  let j;
+  try { const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }); j = await r.json() }
+  catch (e) { j = { ok: false, error: '送れませんでした。電波のよいところでもう一度どうぞ' } }
+  if (!j.ok) {
+    $('#err').textContent = j.error || 'うまくいきませんでした'; $('#err').hidden = false; $('#go').textContent = 'この内容で予約する';
+    if (/埋まり/.test(j.error || '')) { try { const r = await fetch(API + '?action=slots&kind=soudan'); st.slots = (await r.json()).slots || []; st.start = null; render() } catch (e) {} }
+    upd(); return
+  }
+  const text = ['【相談の予約をしました】', 'ご相談: ' + j.purpose, '日時: ' + j.label, '話し方: ' + j.place, 'お名前: ' + body.name].concat(body.note ? ['気になっていること: ' + body.note] : []).join('\n');
+  const lineUrl = 'https://line.me/R/oaMessage/' + LINE_OA + '/?' + encodeURIComponent(text);
+  $('#bar').hidden = true;
+  document.querySelector('.wrap').innerHTML = `<div class="done"><p class="k">たいど</p><h1>予約しました</h1>
+  <div class="card"><dl><dt>ご相談</dt><dd>${esc(j.purpose)}</dd><dt>日時</dt><dd>${esc(j.label)}</dd><dt>話し方</dt><dd>${esc(j.place)}</dd><dt>お名前</dt><dd>${esc(body.name)}</dd></dl></div>
+  ${body.contact === 'line'
+    ? `<p><strong>最後に、下のボタンで予約の内容を LINE に送ってください。</strong>送っていただくと、西村からトークで確認のご連絡をします（2日以内）。</p><a class="go line" href="${lineUrl}">予約の内容を LINE で送る</a>`
+    : `<p>西村から、${esc(body.email)} に確認のご連絡をします（2日以内）。届かないときは、迷惑メールのフォルダも見てください。</p>`}
+  <p class="hint" style="margin-top:16px">日時や話し方を変えたいときは、LINE のトークかメールでお知らせください。</p></div>`;
+};
+main();
+</script>
+</body></html>
