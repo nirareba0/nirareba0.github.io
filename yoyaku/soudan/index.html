@@ -78,10 +78,13 @@ const PURPOSES = [
 ];
 const PLACES = [
   { id: 'online', t: 'オンライン（Google Meet）', s: 'URL は前の日までにお送りします', ph: '（書かなくて大丈夫です）' },
-  { id: 'meet', t: '会って', s: '韮崎市内か近くで。場所はあとで一緒に決めます', ph: '例: 職場に来てほしい、など' },
+  { id: 'meet', t: '会って', s: '土日・祝日は清水屋旅館、平日はニコリ地下の Miacis で', ph: '（書かなくて大丈夫です）' },
+  { id: 'visit', t: 'ご自宅・オフィスに来てほしい', s: '韮崎市内ならうかがいます。場所を書いてください', need: true, ph: '例: ○○株式会社（韮崎市△△町）' },
 ];
+const BASE_NOTE = '会うときは、土日・祝日は清水屋旅館、平日はニコリ地下の Miacis です。韮崎市内なら、ご自宅やオフィスにもうかがいます。';
+const placeName = P => P.id === 'meet' && st.day && st.places[st.day] ? '会って（' + st.places[st.day] + '）' : P.t;
 const inLine = /\bLine\//i.test(navigator.userAgent);
-const st = { slots: [], purpose: '', month: null, day: null, start: null, place: 'online', contact: inLine ? 'line' : 'email' };
+const st = { slots: [], places: {}, purpose: '', month: null, day: null, start: null, place: 'online', contact: inLine ? 'line' : 'email' };
 const $ = s => document.querySelector(s);
 const pad = n => String(n).padStart(2, '0');
 const J = iso => new Date(new Date(iso).getTime() + 9 * 3600000); // 日本時間で読む（UTC の getter を使う）
@@ -92,7 +95,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 $('#calendly').href = CALENDLY;
 
 async function main() {
-  try { const r = await fetch(API + '?action=slots&kind=soudan'); const j = await r.json(); if (!j.ok) throw 0; st.slots = j.slots || [] }
+  try { const r = await fetch(API + '?action=slots&kind=soudan'); const j = await r.json(); if (!j.ok) throw 0; st.slots = j.slots || []; st.places = j.places || {} }
   catch (e) { $('#body').innerHTML = '<div class="msg">空いている時間を読み込めませんでした。下の Calendly から予約するか、少しあとで開き直してください。</div>'; return }
   render();
 }
@@ -134,8 +137,9 @@ function render() {
     if (st.day && list.some(s => keyOf(s) === st.day)) h += `<div class="slots">${list.filter(s => keyOf(s) === st.day).map(s => `<button class="slot" data-start="${s}" aria-pressed="${s === st.start}">${hm(s)}</button>`).join('')}</div>`;
     else h += `<p class="hint">色のついた日を押すと、始まりの時間が出ます。1回60分です。火曜日はお休みです。前の日までの予約になります。</p>`;
   }
-  h += `<h2><b>3</b>話し方</h2>${opt(PLACES, st.place, 'data-place')}
-  <label class="f" for="place">メモ（任意）</label>
+  const places = PLACES.map(p => p.id === 'meet' && st.day && st.places[st.day] ? Object.assign({}, p, { s: lbl(st.day) + 'は' + st.places[st.day] + 'で' }) : p);
+  h += `<h2><b>3</b>話し方</h2><p class="hint" style="margin:-4px 0 10px">${BASE_NOTE}</p>${opt(places, st.place, 'data-place')}
+  <label class="f" for="place">${P.need ? 'うかがう場所（住所や会社の名前）' : 'メモ（任意）'}</label>
   <input id="place" type="text" maxlength="100" placeholder="${P.ph}" value="${esc(st.placeDetail || '')}">
   <h2><b>4</b>お名前と連絡先</h2>
   <label class="f" for="name">お名前</label>
@@ -163,8 +167,8 @@ function keep() { [['#place', 'placeDetail'], ['#name', 'name'], ['#email', 'ema
 const okMail = () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((st.email || '').trim());
 function upd() {
   const P = PLACES.find(p => p.id === st.place), U = PURPOSES.find(p => p.id === st.purpose);
-  const miss = !st.purpose ? 'ご相談の内容を選んでください' : !st.start ? '日時を選んでください' : !(st.name || '').trim() ? 'お名前を書いてください' : (st.contact === 'email' && !okMail()) ? 'メールアドレスを書いてください' : '';
-  $('#sum').textContent = miss || `${U.t}・${lbl(keyOf(st.start))} ${hm(st.start)}〜・${P.t}`;
+  const miss = !st.purpose ? 'ご相談の内容を選んでください' : !st.start ? '日時を選んでください' : !(st.name || '').trim() ? 'お名前を書いてください' : (st.contact === 'email' && !okMail()) ? 'メールアドレスを書いてください' : (P.need && !(st.placeDetail || '').trim()) ? 'うかがう場所を書いてください' : '';
+  $('#sum').textContent = miss || `${U.t}・${lbl(keyOf(st.start))} ${hm(st.start)}〜・${placeName(P)}`;
   $('#go').disabled = !!miss;
 }
 

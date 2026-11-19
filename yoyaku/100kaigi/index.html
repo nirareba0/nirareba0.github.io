@@ -67,11 +67,12 @@ const LIFF_ID = '2011959095-i410ID14';
 const API = 'https://script.google.com/macros/s/AKfycbyevzHDitgKhgKSizgf1Wur1HIUe7OdqDAUMUNemNcTbyyfuvQV-CVbkgQDt_E7EXcb/exec';
 const W = '日月火水木金土';
 const PLACES = [
-  { id: 'own', t: 'ご自身の工房・お店・職場など', s: 'いつもの場所でお話をうかがえるとうれしいです。場所を書いてください', need: true, ph: '例: ○○工房（韮崎市△△町）' },
-  { id: 'nicori', t: 'ニコリの地下', s: 'ご自身の場所が難しいときはこちらで', need: false, ph: '（書かなくて大丈夫です）' },
+  { id: 'own', t: 'ご自身の工房・お店・職場・ご自宅など', s: 'いつもの場所でお話をうかがえるとうれしいです。韮崎市内ならうかがいます。場所を書いてください', need: true, ph: '例: ○○工房（韮崎市△△町）' },
+  { id: 'base', t: '清水屋旅館（土日・祝日）／ニコリ地下の Miacis（平日）', s: 'ご自身の場所が難しいときはこちらで', need: false, ph: '（書かなくて大丈夫です）' },
   { id: 'online', t: 'オンライン', s: 'どうしても会うのが難しいときに', need: false, ph: '例: Zoom、Google Meet など' },
 ];
-const st = { slots: [], ev: '', month: null, day: null, start: null, place: 'own', idToken: null, name: '' };
+const placeT = P => P.id === 'base' && st.day && st.places[st.day] ? st.places[st.day] : P.t;
+const st = { slots: [], places: {}, ev: '', month: null, day: null, start: null, place: 'own', idToken: null, name: '' };
 const $ = s => document.querySelector(s);
 const pad = n => String(n).padStart(2, '0');
 // 日本時間で読む（UTC の getter を使う）
@@ -95,7 +96,7 @@ async function main() {
     st.idToken = liff.getIDToken();
     try { const p = await liff.getProfile(); st.name = p.displayName || '' } catch (e) {}
   } catch (e) {}
-  try { const r = await fetch(API + '?action=slots'); st.slots = (await r.json()).slots || [] }
+  try { const r = await fetch(API + '?action=slots'); const j = await r.json(); st.slots = j.slots || []; st.places = j.places || {} }
   catch (e) { $('#body').innerHTML = '<div class="msg">空き時間を読み込めませんでした。少しあとで開き直してください。</div>'; return }
   if (!st.idToken) { $('#body').innerHTML = '<div class="msg">この予約ページは LINE の中で開いてください。たいどの公式LINE のトークにあるリンクから開けます。</div>'; return }
   render();
@@ -143,8 +144,8 @@ function render() {
       else h += `<p class="hint">色のついた日を押すと、時間が出ます。1回60分です。火曜日はお休みです。</p>`;
     }
     const P = PLACES.find(p => p.id === st.place);
-    h += `<h2><b>3</b>場所</h2><p class="hint" style="margin:-4px 0 10px">基本は会ってお話しします。上から順におすすめです。</p>
-    <div class="places">${PLACES.map(p => `<button class="pl" data-place="${p.id}" aria-pressed="${p.id === st.place}"><span class="r"></span><span><strong>${p.t}</strong><small>${p.s}</small></span></button>`).join('')}</div>
+    h += `<h2><b>3</b>場所</h2><p class="hint" style="margin:-4px 0 10px">基本は会ってお話しします。上から順におすすめです。韮崎市内なら、ご自宅やお店・職場にうかがいます。それ以外は、土日・祝日は清水屋旅館、平日はニコリ地下の Miacis でお会いします。</p>
+    <div class="places">${PLACES.map(p => `<button class="pl" data-place="${p.id}" aria-pressed="${p.id === st.place}"><span class="r"></span><span><strong>${placeT(p)}</strong><small>${p.s}</small></span></button>`).join('')}</div>
     <label class="f" for="place">${P.need ? '場所（名前や住所）' : 'メモ（任意）'}</label>
     <input id="place" type="text" maxlength="100" placeholder="${P.ph}" value="${esc(st.placeDetail || '')}">
     <h2><b>4</b>お名前とひとこと</h2>
@@ -171,7 +172,7 @@ function upd() {
   const name = (st.nameInput ?? st.name).trim();
   const P = PLACES.find(p => p.id === st.place);
   const okPlace = !P.need || (st.placeDetail || '').trim();
-  $('#sel').textContent = st.start ? `${lbl(keyOf(st.start))} ${hm(st.start)}〜・${P.t}` : (st.ev ? '日時を選んでください' : '');
+  $('#sel').textContent = st.start ? `${lbl(keyOf(st.start))} ${hm(st.start)}〜・${placeT(P)}` : (st.ev ? '日時を選んでください' : '');
   $('#go').disabled = !(st.ev && st.start && name && okPlace);
 }
 
