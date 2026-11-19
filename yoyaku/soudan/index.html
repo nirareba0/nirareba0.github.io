@@ -79,7 +79,7 @@ const PURPOSES = [
 const PLACES = [
   { id: 'online', t: 'オンライン（Google Meet）', s: 'URL は前の日までにお送りします', ph: '（書かなくて大丈夫です）' },
   { id: 'meet', t: '会って', s: '土日・祝日は清水屋旅館、平日はニコリ地下の Miacis で', ph: '（書かなくて大丈夫です）' },
-  { id: 'visit', t: 'ご自宅・オフィスに来てほしい', s: '韮崎市内ならうかがいます。場所を書いてください', need: true, ph: '例: ○○株式会社（韮崎市△△町）' },
+  { id: 'visit', t: 'ご自宅・オフィスに来てほしい', s: '韮崎市内ならうかがいます', need: true, ph: '例: ○○株式会社（韮崎市△△町）' },
 ];
 const BASE_NOTE = '会うときは、土日・祝日は清水屋旅館、平日はニコリ地下の Miacis です。韮崎市内なら、ご自宅やオフィスにもうかがいます。';
 const placeName = P => P.id === 'meet' && st.day && st.places[st.day] ? '会って（' + st.places[st.day] + '）' : P.t;
