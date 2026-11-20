@@ -31,19 +31,19 @@ const SKILLS={
  a:{name:'気づく',en:'NOTICE',icon:'i-q',desc:'自分がいま、どんなたいどをしているかに気づく。',
     grow:'たいどは、自分ではいちばん見えにくい。まずは「気づく」ところから。人に映してもらうと、早く見えるようになります。',
     tip:'今日いちど、話している自分の顔をスマホのインカメラで10秒だけ見てみる。思っていた顔と、ちがうかもしれません。',
-    svc:'1on1・コーチング'},
+    svc:'1対1のコーチング／社内のこと（1on1）'},
  b:{name:'決める',en:'DECIDE',icon:'i-check',desc:'場面ごとに、どうふるまうかを先に決めておく。',
     grow:'たいどは、その場で考えると揺れます。場面ごとに一文だけ先に決めておくと、迷う時間が減って、自分を守れます。',
     tip:'明日いちばん気が重い場面を1つ選んで、「そこでのたいど」を一文だけ決めておく（例：「会議では、最初に一回うなずく」）。',
-    svc:'理念・クレドづくり／チームビルディング・研修'},
+    svc:'社内のこと（クレド・研修）'},
  c:{name:'保つ',en:'KEEP',icon:'i-loop',desc:'しんどい日も、たいどを崩さない。崩れても戻す。',
     grow:'しんどい日こそ、たいどの出番です。崩れたときの「戻し方」を一つ持っておくと、毎日が少し楽になります。',
     tip:'崩れそうなときの合図（深呼吸を1回、水を一口など）を一つ決めておく。たいどは、戻し方まで含めて技術です。',
-    svc:'1on1・コーチング'},
+    svc:'1対1のコーチング／社内のこと（1on1）'},
  d:{name:'届ける',en:'REACH',icon:'i-swap',desc:'相手に合わせて使い分け、お互いに乗りあえる。',
     grow:'たいどは、ひとりでは決まりません。相手やチームと一緒に整えると、お互いのたいどが、お互いを乗せていきます。',
     tip:'次の打ち合わせで、自分が話す前に「どう思う？」と1回だけ聞いてみる。相手のたいどが、少し変わることがあります。',
-    svc:'社内コミュニティづくり／採用広報・SNS'},
+    svc:'たいどの聞き取り／採用ページ'},
 };
 
 // 意識度のレベル（合計 0〜16）
@@ -89,9 +89,9 @@ function result(){
   const W=SKILLS[low], H=SKILLS[high];
   const bar=k=>`<div class="r-bar"><p><span class="en">${SKILLS[k].en}</span>${SKILLS[k].name}</p><div class="r-track"><span style="--w:${s[k]/4*100}%"></span></div><p class="r-num">${s[k]}<small>/4</small></p></div>`;
   const summary=`【たいど意識度チェック】${L.name.replace('　',' ')}（${total}/16）気づく${s.a}・決める${s.b}・保つ${s.c}・届ける${s.d}`;
-  const formUrl=FORM+'?usp=pp_url&entry.326506747='+encodeURIComponent(summary+'\n30分の相談を希望します。\n');
+  const formUrl=FORM+'?usp=pp_url&entry.326506747='+encodeURIComponent(summary+'\n相談を希望します。\n');
   const lineId=document.body.dataset.lineId||'', lineBase=document.body.dataset.lineUrl||'';
-  const lineUrl=lineId?'https://line.me/R/oaMessage/'+lineId.replace(/[^@\w.-]/g,'')+'/?'+encodeURIComponent(summary+'\n30分の相談を希望します。'):lineBase;
+  const lineUrl=lineId?'https://line.me/R/oaMessage/'+lineId.replace(/[^@\w.-]/g,'')+'/?'+encodeURIComponent(summary+'\n相談を希望します。'):lineBase;
   const shareText=`たいど意識度チェックで「${L.name.replace('　',' ')}」でした。`;
   const shareUrl='https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(location.href.split('#')[0].split('?')[0]);
   app.innerHTML=`<div class="r">
@@ -104,7 +104,7 @@ function result(){
   <div class="r-grow"><h3>次に伸ばす技術：<span>${W.name}</span></h3><p>${W.grow}</p>${s[high]>s[low]?`<p class="r-strong">いちばん育っているのは「${H.name}」。${H.desc}</p>`:''}</div>
   <div class="r-tip"><h3>今日からできる、小さな練習</h3><p>${W.tip}</p></div>
   <div class="r-outside"><h3>外の人が入ると、早くなる</h3><p>たいどは、自分ではいちばん見えにくい技術です。スポーツにコーチがいるように、外から映してもらうと、気づくのも、決めるのも早くなります。社内では言いにくいことも、利害のない人になら話せます。</p><p class="g-svc">合いそうなしごと：${W.svc}</p></div>
-  <div class="r-cta"><p>この結果をもとに、30分（無料）で、あなたと職場のたいどの話を聞かせてください。</p>
+  <div class="r-cta"><p>この結果をもとに、はじめての相談（60分・無料）で、あなたと職場のたいどの話を聞かせてください。</p>
   <div class="contact-ways"><a class="way-btn way-line" data-line href="${lineUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-line"/></svg><span><strong>結果をLINEで送る</strong><small>友だち追加して、そのまま相談へ</small></span></a><a class="way-btn" href="${formUrl}" target="_blank" rel="noopener noreferrer"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><strong>結果をフォームで送る</strong><small>レベルと点数が入った状態で開きます</small></span></a></div>
   <p class="r-more"><a class="more" href="${document.getElementById('service')?'#service':'index.html#service'}">しごとを見る</a></p>
   <p class="note">LINE・フォームに入るのはチェックの結果（レベルと点数）だけです。回答そのものは、どこにも送っていません。</p></div>
