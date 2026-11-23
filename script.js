@@ -78,7 +78,7 @@ if(animate){
   });
 
   // 3) 画面に入ったら現れる・描かれる
-  const sel='.change-list li,.flow li,.proc li,.lp-cards li,.promise-list li,.price-box,.incl,.dg-wrap,.dots,.work-np,.honest-in,.svc-product,.contact-ways,.start-steps li,.case-list li,.why-list li,.svc-list li,.svc-group-h,.entry,.layers li,.layers-note,.goal-list li,.diag-types,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.local-grid,.card-replica,.about-main>*,.faq-list,.contact .actions';
+  const sel='.change-list li,.flow li,.proc li,.lp-cards li,.promise-list li,.promise-grid li,.scenes figure,.price-box,.incl,.dg-wrap,.dots,.work-np,.honest-in,.svc-product,.contact-ways,.start-steps li,.case-list li,.why-list li,.svc-list li,.svc-group-h,.entry,.layers li,.layers-note,.goal-list li,.diag-types,.label,.sec h2,.sec-lead,.issue-list li,.issue-body>*,.step,.solo,.timeline li,.caution li,.value-list li,.work,.local-grid,.card-replica,.about-main>*,.faq-list,.contact .actions';
   const items=[...document.querySelectorAll(sel)];
   items.forEach(el=>el.classList.add('rv'));
   // 同じ親の中で順番に少しずつ遅らせる
