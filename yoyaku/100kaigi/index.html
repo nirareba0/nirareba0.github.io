@@ -96,7 +96,7 @@ async function main() {
     st.idToken = liff.getIDToken();
     try { const p = await liff.getProfile(); st.name = p.displayName || '' } catch (e) {}
   } catch (e) {}
-  try { const r = await fetch(API + '?action=slots'); const j = await r.json(); st.slots = j.slots || []; st.places = j.places || {}; st.events = j.events || [] }
+  try { const r = await fetch(API + '?action=slots'); const j = await r.json(); st.slots = j.slots || []; st.places = j.places || {}; st.events = (j.events || []).slice(0, 2) } // 直近とその次だけ（2026-11-25 本人「全部でるのがうっとおしい」）
   catch (e) { $('#body').innerHTML = '<div class="msg">空き時間を読み込めませんでした。少しあとで開き直してください。</div>'; return }
   if (!st.idToken) { $('#body').innerHTML = '<div class="msg">この予約ページは LINE の中で開いてください。たいどの公式LINE のトークにあるリンクから開けます。</div>'; return }
   render();
